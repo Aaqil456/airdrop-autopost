@@ -28,8 +28,10 @@ def scrape_tweets(usernames, max_tweets=3):
                     "url": tweet["url"]
                 })
 
-        except subprocess.CalledProcessError as e:
-            print(f"❌ Failed to scrape @{username}: {e}")
+                except subprocess.CalledProcessError as e:
+                    print(f"❌ Failed to scrape @{username}")
+                    print("STDOUT:", e.stdout)
+                    print("STDERR:", e.stderr)
             continue
 
     return all_tweets
