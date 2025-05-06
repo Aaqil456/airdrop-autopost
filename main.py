@@ -11,9 +11,11 @@ def scrape_tweets(usernames, max_tweets=3):
     import time
 
     mirrors = [
-        "https://nitter.net",
         "https://nitter.pufe.org",
         "https://nitter.unixfox.eu",
+        "https://nitter.nixnet.services",
+        "https://nitter.fdn.fr",
+        "https://nitter.net"
     ]
 
     all_tweets = []
