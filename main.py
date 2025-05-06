@@ -3,21 +3,35 @@ import datetime
 import os
 import requests
 import snscrape.modules.twitter as sntwitter
+import subprocess
+
 
 # STEP 1: Scrape Tweets
 def scrape_tweets(usernames, max_tweets=3):
     all_tweets = []
     for username in usernames:
-        tweets = sntwitter.TwitterUserScraper(username).get_items()
-        for i, tweet in enumerate(tweets):
-            if i >= max_tweets:
-                break
-            all_tweets.append({
-                "username": username,
-                "date": tweet.date.strftime("%Y-%m-%d %H:%M:%S"),
-                "content": tweet.content,
-                "url": tweet.url
-            })
+        try:
+            cmd = [
+                "snscrape",
+                "--jsonl",
+                "--max-results", str(max_tweets),
+                f"twitter-user:{username}"
+            ]
+            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+
+            for line in result.stdout.strip().split("\n"):
+                tweet = json.loads(line)
+                all_tweets.append({
+                    "username": username,
+                    "date": tweet["date"],
+                    "content": tweet["content"],
+                    "url": tweet["url"]
+                })
+
+        except subprocess.CalledProcessError as e:
+            print(f"❌ Failed to scrape @{username}: {e}")
+            continue
+
     return all_tweets
 
 # STEP 2: Translate with Gemini 2.0 Flash (gemini-1.5-flash)
