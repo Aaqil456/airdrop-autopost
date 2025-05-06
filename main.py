@@ -7,16 +7,16 @@ import time
 
 # STEP 1: Scrape Tweets from Nitter
 def scrape_tweets(usernames, max_tweets=3):
-    all_tweets = []
+    from bs4 import BeautifulSoup
+    import time
 
-    # ✅ Senarai mirror yang akan dicuba satu persatu
     mirrors = [
+        "https://nitter.net",
         "https://nitter.pufe.org",
         "https://nitter.unixfox.eu",
-        "https://nitter.nixnet.services",
-        "https://nitter.fdn.fr",
-        "https://nitter.net"
     ]
+
+    all_tweets = []
 
     for username in usernames:
         tweet_found = False
@@ -29,18 +29,16 @@ def scrape_tweets(usernames, max_tweets=3):
                 res = requests.get(url, timeout=10)
                 print(f"🔄 Status code: {res.status_code}")
 
-                if res.status_code == 429:
-                    print(f"⛔ Rate limited by {mirror}, trying next mirror...")
-                    continue
-                elif res.status_code != 200:
+                if res.status_code != 200:
                     print(f"❌ Failed to fetch from {mirror} — Status {res.status_code}")
                     continue
 
                 soup = BeautifulSoup(res.text, "html.parser")
-                tweets = soup.select("div.timeline-item")
-                print(f"🧪 Found {len(tweets)} tweet blocks from {mirror} for @{username}")
+                tweet_blocks = soup.select("div.tweet-body")
 
-                for tweet in tweets[:max_tweets]:
+                print(f"🧪 Found {len(tweet_blocks)} tweet blocks from {mirror} for @{username}")
+
+                for tweet in tweet_blocks[:max_tweets]:
                     content_elem = tweet.select_one(".tweet-content")
                     date_elem = tweet.select_one("span.tweet-date a")
 
@@ -60,7 +58,7 @@ def scrape_tweets(usernames, max_tweets=3):
                     })
 
                 tweet_found = True
-                break  # ✅ stop trying more mirrors once successful
+                break
 
             except Exception as e:
                 print(f"❌ Exception from {mirror} for @{username}: {str(e)}")
@@ -69,9 +67,10 @@ def scrape_tweets(usernames, max_tweets=3):
         if not tweet_found:
             print(f"🚫 Failed to scrape any tweets for @{username} from all mirrors.")
 
-        time.sleep(2)  # delay sedikit untuk elak ban
+        time.sleep(1)
 
     return all_tweets
+
 
 
 # STEP 2: Translate with Gemini 2.0 Flash
