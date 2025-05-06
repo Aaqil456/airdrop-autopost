@@ -100,7 +100,7 @@ def translate_text_gemini(text):
 
 # MAIN
 if __name__ == "__main__":
-    usernames = ["cz_binance", "elonmusk", "whalechart"]
+    usernames = ["codeglitch", "flb_xyz"]
     tweets = scrape_tweets(usernames)
 
     result_data = []
