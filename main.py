@@ -6,37 +6,54 @@ from bs4 import BeautifulSoup
 
 # STEP 1: Scrape Tweets from Nitter
 def scrape_tweets(usernames, max_tweets=3):
+    from bs4 import BeautifulSoup
+    import time
+
+    NITTER_INSTANCE = "https://nitter.privacydev.net"  # ✅ Try mirror yang laju & hidup
     all_tweets = []
+
     for username in usernames:
         try:
-            url = f"https://nitter.net/{username}"
+            url = f"{NITTER_INSTANCE}/{username}"
+            print(f"\n🌐 Fetching: {url}")
             res = requests.get(url, timeout=10)
+
+            print(f"🔄 Status code: {res.status_code}")
             if res.status_code != 200:
-                print(f"❌ Failed to fetch @{username} from Nitter — Status code: {res.status_code}")
+                print(f"❌ Failed to fetch @{username} — Status code {res.status_code}")
                 continue
 
             soup = BeautifulSoup(res.text, "html.parser")
-            tweets = soup.select("div.timeline-item")[:max_tweets]
+            tweets = soup.select("div.timeline-item")
 
-            for tweet in tweets:
+            print(f"🧪 Found {len(tweets)} tweet blocks for @{username}")
+
+            for tweet in tweets[:max_tweets]:
                 content_elem = tweet.select_one(".tweet-content")
                 date_elem = tweet.select_one("span.tweet-date a")
-                if content_elem and date_elem:
-                    content = content_elem.text.strip()
-                    date = date_elem["title"]
-                    link = "https://nitter.net" + date_elem["href"]
 
-                    all_tweets.append({
-                        "username": username,
-                        "date": date,
-                        "content": content,
-                        "url": link
-                    })
+                if not content_elem or not date_elem:
+                    print("⚠️ Tweet structure missing content or date.")
+                    continue
+
+                content = content_elem.get_text(strip=True)
+                date = date_elem["title"]
+                link = "https://nitter.net" + date_elem["href"]
+
+                all_tweets.append({
+                    "username": username,
+                    "date": date,
+                    "content": content,
+                    "url": link
+                })
+
+            time.sleep(1)  # prevent IP ban from aggressive scraping
         except Exception as e:
-            print(f"❌ Error scraping @{username} — {str(e)}")
+            print(f"❌ Exception scraping @{username} — {str(e)}")
             continue
 
     return all_tweets
+
 
 # STEP 2: Translate with Gemini 2.0 Flash
 def translate_text_gemini(text):
