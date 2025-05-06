@@ -45,32 +45,54 @@ def translate_text_gemini(text):
             return f"❌ Failed to parse Gemini response: {str(e)}"
     return f"❌ Gemini API Error: {res.status_code} — {res.text}"
 
-# STEP 3: Post to WordPress
-def post_to_wordpress(title, content):
-    wp_url = os.getenv("WP_API_URL")
-    wp_user = os.getenv("WP_USER")
-    wp_pass = os.getenv("WP_APP_PASS")
+# STEP 3: (Disabled) Post to WordPress
+# def post_to_wordpress(title, content):
+#     wp_url = os.getenv("WP_API_URL")
+#     wp_user = os.getenv("WP_USER")
+#     wp_pass = os.getenv("WP_APP_PASS")
 
-    payload = {
-        "title": title,
-        "content": content,
-        "status": "publish"
-    }
+#     payload = {
+#         "title": title,
+#         "content": content,
+#         "status": "publish"
+#     }
 
-    res = requests.post(wp_url, auth=(wp_user, wp_pass), json=payload)
-    if res.status_code == 201:
-        print("✅ Posted:", title)
-    else:
-        print("❌ Failed to post:", res.text)
+#     res = requests.post(wp_url, auth=(wp_user, wp_pass), json=payload)
+#     if res.status_code == 201:
+#         print("✅ Posted:", title)
+#     else:
+#         print("❌ Failed to post:", res.text)
 
 # MAIN
 if __name__ == "__main__":
     usernames = ["codeglitch", "flb_xyz"]
     tweets = scrape_tweets(usernames)
 
+    result_data = []
     for tweet in tweets:
         translated = translate_text_gemini(tweet["content"])
         if not translated.startswith("❌"):
-            title = f"Tweet oleh @{tweet['username']} pada {tweet['date']}"
-            content = f"<p>{translated}</p><p><a href='{tweet['url']}'>Lihat tweet asal</a></p>"
-            post_to_wordpress(title, content)
+            result_data.append({
+                "username": tweet["username"],
+                "date": tweet["date"],
+                "original": tweet["content"],
+                "translated": translated,
+                "tweet_url": tweet["url"]
+            })
+
+            # Optional: Preview
+            print(f"\n✅ @{tweet['username']}:\n{translated}\n")
+
+            # WordPress post disabled for now
+            # title = f"Tweet oleh @{tweet['username']} pada {tweet['date']}"
+            # content = f"<p>{translated}</p><p><a href='{tweet['url']}'>Lihat tweet asal</a></p>"
+            # post_to_wordpress(title, content)
+
+    # Save to results.json
+    with open("results.json", "w", encoding="utf-8") as f:
+        json.dump({
+            "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "data": result_data
+        }, f, ensure_ascii=False, indent=2)
+
+    print("✅ All tweets processed and saved to results.json")
