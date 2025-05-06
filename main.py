@@ -3,54 +3,73 @@ import datetime
 import os
 import requests
 from bs4 import BeautifulSoup
+import time
 
 # STEP 1: Scrape Tweets from Nitter
 def scrape_tweets(usernames, max_tweets=3):
-    from bs4 import BeautifulSoup
-    import time
-
-    NITTER_INSTANCE = "https://nitter.privacydev.net"  # ✅ Try mirror yang laju & hidup
     all_tweets = []
 
+    # ✅ Senarai mirror yang akan dicuba satu persatu
+    mirrors = [
+        "https://nitter.pufe.org",
+        "https://nitter.unixfox.eu",
+        "https://nitter.nixnet.services",
+        "https://nitter.fdn.fr",
+        "https://nitter.net"
+    ]
+
     for username in usernames:
-        try:
-            url = f"{NITTER_INSTANCE}/{username}"
+        tweet_found = False
+
+        for mirror in mirrors:
+            url = f"{mirror}/{username}"
             print(f"\n🌐 Fetching: {url}")
-            res = requests.get(url, timeout=10)
 
-            print(f"🔄 Status code: {res.status_code}")
-            if res.status_code != 200:
-                print(f"❌ Failed to fetch @{username} — Status code {res.status_code}")
-                continue
+            try:
+                res = requests.get(url, timeout=10)
+                print(f"🔄 Status code: {res.status_code}")
 
-            soup = BeautifulSoup(res.text, "html.parser")
-            tweets = soup.select("div.timeline-item")
-
-            print(f"🧪 Found {len(tweets)} tweet blocks for @{username}")
-
-            for tweet in tweets[:max_tweets]:
-                content_elem = tweet.select_one(".tweet-content")
-                date_elem = tweet.select_one("span.tweet-date a")
-
-                if not content_elem or not date_elem:
-                    print("⚠️ Tweet structure missing content or date.")
+                if res.status_code == 429:
+                    print(f"⛔ Rate limited by {mirror}, trying next mirror...")
+                    continue
+                elif res.status_code != 200:
+                    print(f"❌ Failed to fetch from {mirror} — Status {res.status_code}")
                     continue
 
-                content = content_elem.get_text(strip=True)
-                date = date_elem["title"]
-                link = "https://nitter.net" + date_elem["href"]
+                soup = BeautifulSoup(res.text, "html.parser")
+                tweets = soup.select("div.timeline-item")
+                print(f"🧪 Found {len(tweets)} tweet blocks from {mirror} for @{username}")
 
-                all_tweets.append({
-                    "username": username,
-                    "date": date,
-                    "content": content,
-                    "url": link
-                })
+                for tweet in tweets[:max_tweets]:
+                    content_elem = tweet.select_one(".tweet-content")
+                    date_elem = tweet.select_one("span.tweet-date a")
 
-            time.sleep(1)  # prevent IP ban from aggressive scraping
-        except Exception as e:
-            print(f"❌ Exception scraping @{username} — {str(e)}")
-            continue
+                    if not content_elem or not date_elem:
+                        print("⚠️ Missing tweet content or date.")
+                        continue
+
+                    content = content_elem.get_text(strip=True)
+                    date = date_elem["title"]
+                    link = mirror + date_elem["href"]
+
+                    all_tweets.append({
+                        "username": username,
+                        "date": date,
+                        "content": content,
+                        "url": link
+                    })
+
+                tweet_found = True
+                break  # ✅ stop trying more mirrors once successful
+
+            except Exception as e:
+                print(f"❌ Exception from {mirror} for @{username}: {str(e)}")
+                continue
+
+        if not tweet_found:
+            print(f"🚫 Failed to scrape any tweets for @{username} from all mirrors.")
+
+        time.sleep(2)  # delay sedikit untuk elak ban
 
     return all_tweets
 
