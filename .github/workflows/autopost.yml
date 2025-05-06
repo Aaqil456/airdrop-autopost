@@ -28,6 +28,7 @@ jobs:
       - name: Verify Secrets
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASS: ${{ secrets.WP_APP_PASS }}
           WP_API_URL: ${{ secrets.WP_API_URL }}
@@ -60,6 +61,7 @@ jobs:
       - name: Run Tweet Scraper & Poster
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASS: ${{ secrets.WP_APP_PASS }}
           WP_API_URL: ${{ secrets.WP_API_URL }}
