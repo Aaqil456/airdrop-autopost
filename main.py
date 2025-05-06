@@ -15,7 +15,7 @@ def scrape_tweets(usernames, max_tweets=3):
                 "snscrape",
                 "--jsonl",
                 "--max-results", str(max_tweets),
-                f"twitter-user:{username}"
+                "twitter-profile", username
             ]
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
 
@@ -35,6 +35,7 @@ def scrape_tweets(usernames, max_tweets=3):
             continue
 
     return all_tweets
+
 
 
 # STEP 2: Translate with Gemini 2.0 Flash (gemini-1.5-flash)
