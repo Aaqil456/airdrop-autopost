@@ -11,9 +11,13 @@ def scrape_tweets(usernames, max_tweets=3):
     import time
 
     mirrors = [
-        "https://nitter.net",
-        "https://nitter.pufe.org",
-        "https://nitter.unixfox.eu",
+        "https://nitter.kavin.rocks",
+        "https://nitter.cz",
+        "https://nitter.privacydev.net",
+        "https://nitter.pussthecat.org",
+        "https://nitter.1d4.us",
+        "https://nitter.it",
+        "https://nitter.esmailelbob.xyz"
     ]
 
     all_tweets = []
@@ -39,9 +43,9 @@ def scrape_tweets(usernames, max_tweets=3):
                 print(f"🧪 Found {len(timeline_items)} tweet blocks from {mirror} for @{username}")
 
                 for item in timeline_items[:max_tweets]:
-                    content_elem = item.select_one("div.tweet-content")
-                    link_elem = item.select_one("a.tweet-link")
-                    date_elem = item.select_one("span.tweet-date a")
+                    content_elem = item.select_one("div.tweet-content.media-body")
+                    #link_elem = item.select_one("a.tweet-link")
+                    #date_elem = item.select_one("span.tweet-date a")
 
                     if not content_elem or not link_elem or not date_elem:
                         print("⚠️ Missing data in tweet block.")
