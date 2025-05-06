@@ -11,11 +11,9 @@ def scrape_tweets(usernames, max_tweets=3):
     import time
 
     mirrors = [
+        "https://nitter.net",
         "https://nitter.pufe.org",
         "https://nitter.unixfox.eu",
-        "https://nitter.nixnet.services",
-        "https://nitter.fdn.fr",
-        "https://nitter.net"
     ]
 
     all_tweets = []
@@ -36,21 +34,22 @@ def scrape_tweets(usernames, max_tweets=3):
                     continue
 
                 soup = BeautifulSoup(res.text, "html.parser")
-                tweet_blocks = soup.select("div.tweet-body")
+                timeline_items = soup.select("div.timeline-item")
 
-                print(f"🧪 Found {len(tweet_blocks)} tweet blocks from {mirror} for @{username}")
+                print(f"🧪 Found {len(timeline_items)} tweet blocks from {mirror} for @{username}")
 
-                for tweet in tweet_blocks[:max_tweets]:
-                    content_elem = tweet.select_one(".tweet-content")
-                    date_elem = tweet.select_one("span.tweet-date a")
+                for item in timeline_items[:max_tweets]:
+                    content_elem = item.select_one("div.tweet-content")
+                    link_elem = item.select_one("a.tweet-link")
+                    date_elem = item.select_one("span.tweet-date a")
 
-                    if not content_elem or not date_elem:
-                        print("⚠️ Missing tweet content or date.")
+                    if not content_elem or not link_elem or not date_elem:
+                        print("⚠️ Missing data in tweet block.")
                         continue
 
                     content = content_elem.get_text(strip=True)
-                    date = date_elem["title"]
-                    link = mirror + date_elem["href"]
+                    date = date_elem.get("title", "Unknown Date")
+                    link = mirror + link_elem["href"]
 
                     all_tweets.append({
                         "username": username,
@@ -72,6 +71,7 @@ def scrape_tweets(usernames, max_tweets=3):
         time.sleep(1)
 
     return all_tweets
+
 
 
 
