@@ -3,48 +3,50 @@ import json
 import time
 import datetime
 import requests
+from urllib.parse import urlparse
 
 # === ENV ===
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 APIFY_TOKEN = os.getenv("APIFY_API_TOKEN")
 
 # === STEP 1: Fetch Tweets via Apify Actor ===
-def fetch_tweets_apify(usernames, max_tweets=3):
-    url = "https://api.apify.com/v2/acts/pratikdani~twitter-profile-scraper/run-sync-get-dataset-items"
+def fetch_tweets_apify(profile_url, max_tweets=3):
+    api_url = "https://api.apify.com/v2/acts/pratikdani~twitter-profile-scraper/run-sync-get-dataset-items"
     all_tweets = []
 
-    for username in usernames:
-        print(f"📥 Fetching tweets for @{username} from Apify...")
-        payload = {
-            "usernames": [username],
-            "tweetsLimit": max_tweets
-        }
+    # Extract username from URL for logging
+    username = urlparse(profile_url).path.strip("/")
 
-        try:
-            response = requests.post(
-                f"{url}?token={APIFY_TOKEN}",
-                json=payload,
-                timeout=120
-            )
+    print(f"📥 Fetching tweets from: {profile_url} (@{username})")
 
-            if response.status_code == 201:
-                tweets = response.json()
-                for tweet in tweets:
-                    all_tweets.append({
-                        "username": username,
-                        "date": tweet.get("dateTime", ""),
-                        "content": tweet.get("text", ""),
-                        "url": tweet.get("url", "")
-                    })
-            else:
-                print(f"❌ Failed to fetch from Apify for @{username} — {response.status_code}: {response.text}")
-        except Exception as e:
-            print(f"❌ Exception while fetching @{username}: {e}")
+    payload = {
+        "urls": [profile_url],
+        "tweetsLimit": max_tweets
+    }
 
-        time.sleep(2)  # To avoid hitting API too fast
+    try:
+        response = requests.post(
+            f"{api_url}?token={APIFY_TOKEN}",
+            json=payload,
+            timeout=120
+        )
 
+        if response.status_code == 201:
+            tweets = response.json()
+            for tweet in tweets:
+                all_tweets.append({
+                    "username": tweet.get("username", username),
+                    "date": tweet.get("dateTime", ""),
+                    "content": tweet.get("text", ""),
+                    "url": tweet.get("url", "")
+                })
+        else:
+            print(f"❌ Failed to fetch from Apify for @{username} — {response.status_code}: {response.text}")
+    except Exception as e:
+        print(f"❌ Exception while fetching @{username}: {e}")
+
+    time.sleep(2)  # Avoid rate limit
     return all_tweets
-
 
 # === STEP 2: Translate using Gemini 2.0 Flash ===
 def translate_text_gemini(text):
@@ -70,25 +72,30 @@ def translate_text_gemini(text):
     except Exception as e:
         return f"❌ Gemini Exception: {e}"
 
-
 # === MAIN ===
 if __name__ == "__main__":
-    usernames = ["codeglitch", "flb_xyz"]
-    tweets = fetch_tweets_apify(usernames)
+    profile_urls = [
+        "https://x.com/flb_xyz"
+        # Add more links here
+    ]
 
     result_data = []
-    for tweet in tweets:
-        translated = translate_text_gemini(tweet["content"])
-        if not translated.startswith("❌"):
-            result_data.append({
-                "username": tweet["username"],
-                "date": tweet["date"],
-                "original": tweet["content"],
-                "translated": translated,
-                "tweet_url": tweet["url"]
-            })
 
-            print(f"\n✅ @{tweet['username']}:\n{translated}\n")
+    for profile_url in profile_urls:
+        tweets = fetch_tweets_apify(profile_url)
+
+        for tweet in tweets:
+            translated = translate_text_gemini(tweet["content"])
+            if not translated.startswith("❌"):
+                result_data.append({
+                    "username": tweet["username"],
+                    "date": tweet["date"],
+                    "original": tweet["content"],
+                    "translated": translated,
+                    "tweet_url": tweet["url"]
+                })
+
+                print(f"\n✅ @{tweet['username']}:\n{translated}\n")
 
     # Save to JSON
     with open("results.json", "w", encoding="utf-8") as f:
