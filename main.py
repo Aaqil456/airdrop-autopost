@@ -28,13 +28,14 @@ def scrape_tweets(usernames, max_tweets=3):
                     "url": tweet["url"]
                 })
 
-                except subprocess.CalledProcessError as e:
-                    print(f"❌ Failed to scrape @{username}")
-                    print("STDOUT:", e.stdout)
-                    print("STDERR:", e.stderr)
+        except subprocess.CalledProcessError as e:
+            print(f"❌ Failed to scrape @{username}")
+            print("STDOUT:", e.stdout)
+            print("STDERR:", e.stderr)
             continue
 
     return all_tweets
+
 
 # STEP 2: Translate with Gemini 2.0 Flash (gemini-1.5-flash)
 def translate_text_gemini(text):
