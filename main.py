@@ -6,35 +6,33 @@ from bs4 import BeautifulSoup
 import time
 
 # STEP 1: Scrape Tweets from Nitter
+import requests
+from bs4 import BeautifulSoup
+
+# ✅ Senarai semua mirror fallback (boleh tambah lagi kalau perlu)
+NITTER_MIRRORS = [
+    "https://nitter.cz",
+    "https://nitter.net",
+    "https://nitter.kavin.rocks",
+    "https://nitter.poast.org",
+    "https://nitter.privacydev.net"
+]
+
 def scrape_tweets(usernames, max_tweets=3):
-    from bs4 import BeautifulSoup
-    import time
-
-    mirrors = [
-        "https://nitter.kavin.rocks",
-        "https://nitter.cz",
-        "https://nitter.privacydev.net",
-        "https://nitter.pussthecat.org",
-        "https://nitter.1d4.us",
-        "https://nitter.it",
-        "https://nitter.esmailelbob.xyz"
-    ]
-
     all_tweets = []
 
     for username in usernames:
-        tweet_found = False
+        success = False
 
-        for mirror in mirrors:
-            url = f"{mirror}/{username}"
-            print(f"\n🌐 Fetching: {url}")
-
+        for mirror in NITTER_MIRRORS:
             try:
+                url = f"{mirror}/{username}"
+                print(f"\n🌐 Fetching: {url}")
                 res = requests.get(url, timeout=10)
                 print(f"🔄 Status code: {res.status_code}")
 
                 if res.status_code != 200:
-                    print(f"❌ Failed to fetch from {mirror} — Status {res.status_code}")
+                    print(f"❌ Failed to fetch from {url} — Status {res.status_code}")
                     continue
 
                 soup = BeautifulSoup(res.text, "html.parser")
@@ -42,37 +40,37 @@ def scrape_tweets(usernames, max_tweets=3):
 
                 print(f"🧪 Found {len(timeline_items)} tweet blocks from {mirror} for @{username}")
 
+                if not timeline_items:
+                    continue
+
                 for item in timeline_items[:max_tweets]:
                     content_elem = item.select_one("div.tweet-content.media-body")
-                    #link_elem = item.select_one("a.tweet-link")
-                    #date_elem = item.select_one("span.tweet-date a")
+                    link_elem = item.select_one("a.tweet-link")
+                    image_elem = item.select_one("div.attachment.image img")
 
-                    if not content_elem or not link_elem or not date_elem:
-                        print("⚠️ Missing data in tweet block.")
+                    if not content_elem or not link_elem:
                         continue
 
-                    content = content_elem.get_text(strip=True)
-                    date = date_elem.get("title", "Unknown Date")
-                    link = mirror + link_elem["href"]
+                    tweet_text = content_elem.get_text(strip=True)
+                    tweet_url = mirror + link_elem["href"]
+                    tweet_image = mirror + image_elem["src"] if image_elem else None
 
                     all_tweets.append({
                         "username": username,
-                        "date": date,
-                        "content": content,
-                        "url": link
+                        "content": tweet_text,
+                        "url": tweet_url,
+                        "image": tweet_image
                     })
 
-                tweet_found = True
-                break
+                success = True
+                break  # ✅ Berjaya, tak perlu cuba mirror lain
 
             except Exception as e:
-                print(f"❌ Exception from {mirror} for @{username}: {str(e)}")
+                print(f"❌ Exception from {mirror} for @{username}: {e}")
                 continue
 
-        if not tweet_found:
+        if not success:
             print(f"🚫 Failed to scrape any tweets for @{username} from all mirrors.")
-
-        time.sleep(1)
 
     return all_tweets
 
