@@ -1,15 +1,19 @@
-name: AutoPost Tweets to WordPress
+name: Airdrop Scraper, Translate & Post
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # runs every hour
-  workflow_dispatch:     # allows manual run
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 * * * *'  # Enable later if needed (every hour)
+
+permissions:
+  contents: write
 
 jobs:
   autopost:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -18,12 +22,57 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install snscrape requests
 
-      - name: Run autopost script
+      - name: Verify Secrets
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          WP_API_URL: ${{ secrets.WP_API_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_APP_PASS: ${{ secrets.WP_APP_PASS }}
+          WP_API_URL: ${{ secrets.WP_API_URL }}
+          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "❌ GEMINI_API_KEY secret is missing!"
+            exit 1
+          fi
+          if [ -z "$WP_USER" ]; then
+            echo "❌ WP_USER secret is missing!"
+            exit 1
+          fi
+          if [ -z "$WP_APP_PASS" ]; then
+            echo "❌ WP_APP_PASS secret is missing!"
+            exit 1
+          fi
+          if [ -z "$WP_API_URL" ]; then
+            echo "❌ WP_API_URL secret is missing!"
+            exit 1
+          fi
+          if [ -z "$ACTIONS_PAT" ]; then
+            echo "❌ ACTIONS_PAT secret is missing!"
+            exit 1
+          fi
+
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
+      - name: Run Tweet Scraper & Poster
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_APP_PASS: ${{ secrets.WP_APP_PASS }}
+          WP_API_URL: ${{ secrets.WP_API_URL }}
         run: python main.py
+
+      - name: Commit and push result JSON (optional)
+        if: always()
+        env:
+          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add results.json || echo "No results.json to commit"
+          git status
+          git diff --cached --quiet || git commit -m "Update results.json [auto]"
+          git push https://x-access-token:${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git HEAD:main
