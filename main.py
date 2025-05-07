@@ -32,14 +32,24 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                            .get("timeline_response", {}).get("timeline", {}) \
                            .get("instructions", [])
 
+        print(f"🧪 Found {len(instructions)} instruction blocks")
+
         for instruction in instructions:
             if instruction.get("__typename") == "TimelineAddEntries":
                 entries = instruction.get("entries", [])
+                print(f"📦 Processing {len(entries)} entries from timeline")
+
                 for entry in entries:
                     try:
+                        # 💡 Print the entire entry for inspection
+                        # print("📌 Entry Debug:", json.dumps(entry, indent=2))
+
                         content = entry.get("content", {})
                         item_content = content.get("itemContent", {})
                         tweet_result = item_content.get("tweet_results", {}).get("result", {})
+
+                        # Debug print
+                        print("👉 Tweet result keys:", list(tweet_result.keys()))
 
                         legacy = tweet_result.get("legacy", {})
                         tweet_id = tweet_result.get("rest_id", "")
