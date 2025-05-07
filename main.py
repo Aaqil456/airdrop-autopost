@@ -41,9 +41,10 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
                 for entry in entries:
                     try:
-                        content = entry.get("content", {})
-                        item_content = content.get("itemContent", {})
-                        tweet_result = item_content.get("tweet_results", {}).get("result", {})
+                        tweet_result = entry.get("content", {}) \
+                                            .get("content", {}) \
+                                            .get("tweetResult", {}) \
+                                            .get("result", {})
 
                         legacy = tweet_result.get("legacy", {})
                         text = legacy.get("full_text", legacy.get("text", ""))
@@ -95,7 +96,7 @@ def translate_text_gemini(text):
 
 # === MAIN EXECUTION ===
 if __name__ == "__main__":
-    usernames = ["flb_xyz","elonmusk"]  # Tambah username lain jika perlu
+    usernames = ["flb_xyz","elonmusk"]
     result_data = []
 
     for username in usernames:
