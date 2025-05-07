@@ -6,7 +6,7 @@ import requests
 
 # === ENV ===
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")  # Simpan dalam .env atau GitHub Secrets
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")  # Guna GitHub Secrets atau .env
 
 # === STEP 1: Fetch Tweets via RapidAPI ===
 def fetch_tweets_rapidapi(username, max_tweets=3):
@@ -21,10 +21,19 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
     try:
         response = requests.get(url, headers=headers, params=querystring, timeout=30)
-
         if response.status_code == 200:
             data = response.json()
-            tweets_raw = data.get("data", [])[:max_tweets]
+
+            tweets_raw = data.get("data", [])
+
+            # ✅ Fix: Check kalau bukan list, print & return kosong
+            if not isinstance(tweets_raw, list):
+                print(f"❌ Unexpected format for tweets from @{username}:")
+                print(json.dumps(tweets_raw, indent=2))
+                return []
+
+            # ✅ Slice ikut jumlah max_tweets
+            tweets_raw = tweets_raw[:max_tweets]
 
             tweets = []
             for tweet in tweets_raw:
@@ -36,7 +45,7 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                 })
             return tweets
         else:
-            print(f"❌ RapidAPI Error: {response.status_code} — {response.text}")
+            print(f"❌ RapidAPI Error {response.status_code}: {response.text}")
             return []
     except Exception as e:
         print(f"❌ Exception while fetching @{username}: {e}")
@@ -70,7 +79,7 @@ def translate_text_gemini(text):
 if __name__ == "__main__":
     usernames = [
         "flb_xyz"
-        # Tambah username lain jika perlu
+        # Tambah username lain jika mahu
     ]
 
     result_data = []
@@ -91,7 +100,7 @@ if __name__ == "__main__":
 
                 print(f"\n✅ @{tweet['username']}:\n{translated}\n")
 
-    # Simpan ke results.json
+    # Simpan ke JSON
     final_result = {
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "data": result_data
@@ -102,6 +111,6 @@ if __name__ == "__main__":
 
     print("✅ All tweets processed and saved to results.json")
 
-    # === DEBUG PRINT ===
+    # === Debug Output ===
     print("\n📦 DEBUG OUTPUT (results.json):")
     print(json.dumps(final_result, ensure_ascii=False, indent=2))
