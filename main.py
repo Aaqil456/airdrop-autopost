@@ -33,7 +33,6 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
         tweets = []
 
-        # ✅ Try to extract instructions from both possible locations
         possible_paths = [
             data.get("user_result", {}).get("result", {}),
             data.get("data", {}).get("user_result", {}).get("result", {})
@@ -63,6 +62,15 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
                         legacy = tweet_result.get("legacy", {})
                         text = legacy.get("full_text", legacy.get("text", ""))
+                        media_urls = []
+
+                        # Extract media if available
+                        extended_entities = legacy.get("extended_entities", {})
+                        media = extended_entities.get("media", [])
+                        for m in media:
+                            media_url = m.get("media_url_https") or m.get("media_url")
+                            if media_url:
+                                media_urls.append(media_url)
 
                         if not text:
                             print("⚠️ No text found — skipped.")
@@ -70,7 +78,10 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
                         print(f"✅ Extracted tweet: {text[:60]}...")
 
-                        tweets.append(text)
+                        tweets.append({
+                            "text": text,
+                            "images": media_urls
+                        })
 
                         if len(tweets) >= max_tweets:
                             return tweets
@@ -85,11 +96,15 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
         print(f"❌ Exception while fetching @{username}: {e}")
         return []
 
-# === STEP 2: Translate using Gemini 2.0 Flash ===
+# === STEP 2: Translate using Gemini 2.0 Flash (Only Malay Response) ===
 def translate_text_gemini(text):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
     headers = {"Content-Type": "application/json"}
-    prompt = f"Translate the following tweet into Malay (Bahasa Melayu) with a casual, local tone. Keep all crypto terms (like wallet, futures, mining) in English:\n\n\"{text}\""
+    prompt = (
+        f"Translate the following tweet into Malay (Bahasa Melayu) only. "
+        f"Do not include English. Return just the translated version, "
+        f"as a single sentence or paragraph only:\n\n\"{text}\""
+    )
 
     body = {
         "contents": [
@@ -117,17 +132,18 @@ if __name__ == "__main__":
     for username in usernames:
         tweets = fetch_tweets_rapidapi(username)
 
-        for text in tweets:
-            translated = translate_text_gemini(text)
+        for tweet in tweets:
+            translated = translate_text_gemini(tweet["text"])
             if not translated.startswith("❌"):
                 result_data.append({
-                    "original": text,
-                    "translated": translated
+                    "original": tweet["text"],
+                    "translated": translated,
+                    "images": tweet["images"]
                 })
 
                 print(f"\n✅ Translated:\n{translated}\n")
 
-    # Simpan ke JSON (simple version)
+    # Simpan ke JSON
     final_result = {
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "data": result_data
