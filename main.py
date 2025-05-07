@@ -95,7 +95,7 @@ def translate_text_gemini(text):
 
 # === MAIN EXECUTION ===
 if __name__ == "__main__":
-    usernames = ["flb_xyz"]  # Tambah username lain jika perlu
+    usernames = ["flb_xyz","elonmusk"]  # Tambah username lain jika perlu
     result_data = []
 
     for username in usernames:
