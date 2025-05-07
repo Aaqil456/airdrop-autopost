@@ -3,50 +3,44 @@ import json
 import time
 import datetime
 import requests
-from urllib.parse import urlparse
 
 # === ENV ===
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-APIFY_TOKEN = os.getenv("APIFY_API_TOKEN")
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")  # Simpan dalam .env atau GitHub Secrets
 
-# === STEP 1: Fetch Tweets via Apify Actor ===
-def fetch_tweets_apify(profile_url, max_tweets=3):
-    api_url = "https://api.apify.com/v2/acts/pratikdani~twitter-profile-scraper/run-sync-get-dataset-items"
-    all_tweets = []
-
-    # Extract username from URL for logging
-    username = urlparse(profile_url).path.strip("/")
-
-    print(f"📥 Fetching tweets from: {profile_url} (@{username})")
-
-    payload = {
-        "urls": [profile_url],
-        "tweetsLimit": max_tweets
+# === STEP 1: Fetch Tweets via RapidAPI ===
+def fetch_tweets_rapidapi(username, max_tweets=3):
+    url = "https://twttrapi.p.rapidapi.com/user-tweets"
+    querystring = {"username": username}
+    headers = {
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "x-rapidapi-host": "twttrapi.p.rapidapi.com"
     }
 
-    try:
-        response = requests.post(
-            f"{api_url}?token={APIFY_TOKEN}",
-            json=payload,
-            timeout=120
-        )
+    print(f"📥 Fetching tweets from: @{username}")
 
-        if response.status_code == 201:
-            tweets = response.json()
-            for tweet in tweets:
-                all_tweets.append({
-                    "username": tweet.get("username", username),
-                    "date": tweet.get("dateTime", ""),
-                    "content": tweet.get("text", ""),
-                    "url": tweet.get("url", "")
+    try:
+        response = requests.get(url, headers=headers, params=querystring, timeout=30)
+
+        if response.status_code == 200:
+            data = response.json()
+            tweets_raw = data.get("data", [])[:max_tweets]
+
+            tweets = []
+            for tweet in tweets_raw:
+                tweets.append({
+                    "username": username,
+                    "date": tweet.get("created_at", ""),
+                    "content": tweet.get("full_text", tweet.get("text", "")),
+                    "url": f"https://x.com/{username}/status/{tweet.get('id_str', '')}"
                 })
+            return tweets
         else:
-            print(f"❌ Failed to fetch from Apify for @{username} — {response.status_code}: {response.text}")
+            print(f"❌ RapidAPI Error: {response.status_code} — {response.text}")
+            return []
     except Exception as e:
         print(f"❌ Exception while fetching @{username}: {e}")
-
-    time.sleep(2)  # Avoid rate limit
-    return all_tweets
+        return []
 
 # === STEP 2: Translate using Gemini 2.0 Flash ===
 def translate_text_gemini(text):
@@ -72,17 +66,17 @@ def translate_text_gemini(text):
     except Exception as e:
         return f"❌ Gemini Exception: {e}"
 
-# === MAIN ===
+# === MAIN EXECUTION ===
 if __name__ == "__main__":
-    profile_urls = [
-        "https://x.com/flb_xyz"
-        # Add more links here
+    usernames = [
+        "flb_xyz"
+        # Tambah username lain jika perlu
     ]
 
     result_data = []
 
-    for profile_url in profile_urls:
-        tweets = fetch_tweets_apify(profile_url)
+    for username in usernames:
+        tweets = fetch_tweets_rapidapi(username)
 
         for tweet in tweets:
             translated = translate_text_gemini(tweet["content"])
@@ -97,11 +91,17 @@ if __name__ == "__main__":
 
                 print(f"\n✅ @{tweet['username']}:\n{translated}\n")
 
-    # Save to JSON
+    # Simpan ke results.json
+    final_result = {
+        "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "data": result_data
+    }
+
     with open("results.json", "w", encoding="utf-8") as f:
-        json.dump({
-            "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "data": result_data
-        }, f, ensure_ascii=False, indent=2)
+        json.dump(final_result, f, ensure_ascii=False, indent=2)
 
     print("✅ All tweets processed and saved to results.json")
+
+    # === DEBUG PRINT ===
+    print("\n📦 DEBUG OUTPUT (results.json):")
+    print(json.dumps(final_result, ensure_ascii=False, indent=2))
