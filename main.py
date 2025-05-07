@@ -9,7 +9,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 
 # === STEP 1: Fetch Tweets via RapidAPI ===
-def fetch_tweets_rapidapi(username, max_tweets=3):
+def fetch_tweets_rapidapi(username, max_tweets=30):
     url = "https://twttrapi.p.rapidapi.com/user-tweets"
     querystring = {"username": username}
     headers = {
