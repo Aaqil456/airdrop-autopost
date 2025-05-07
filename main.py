@@ -37,19 +37,17 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                 entries = instruction.get("entries", [])
                 for entry in entries:
                     try:
-                        tweet_data = entry.get("content", {}) \
-                                          .get("itemContent", {}) \
-                                          .get("tweet_results", {}) \
-                                          .get("result", {})
+                        content = entry.get("content", {})
+                        item_content = content.get("itemContent", {})
+                        tweet_result = item_content.get("tweet_results", {}).get("result", {})
 
-                        if not tweet_data:
-                            print("⚠️ Empty or invalid tweet data — skipped.")
-                            continue
-
-                        tweet_id = tweet_data.get("rest_id", "")
-                        legacy = tweet_data.get("legacy", {})
+                        legacy = tweet_result.get("legacy", {})
+                        tweet_id = tweet_result.get("rest_id", "")
                         text = legacy.get("full_text", legacy.get("text", ""))
                         created_at = legacy.get("created_at", "")
+                        favorite_count = legacy.get("favorite_count", 0)
+                        retweet_count = legacy.get("retweet_count", 0)
+                        reply_count = legacy.get("reply_count", 0)
 
                         if not text:
                             print("⚠️ No text found — skipped.")
@@ -61,7 +59,10 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                             "username": username,
                             "date": created_at,
                             "content": text,
-                            "url": f"https://x.com/{username}/status/{tweet_id}"
+                            "url": f"https://x.com/{username}/status/{tweet_id}",
+                            "likes": favorite_count,
+                            "retweets": retweet_count,
+                            "replies": reply_count
                         })
 
                         if len(tweets) >= max_tweets:
@@ -121,7 +122,10 @@ if __name__ == "__main__":
                     "date": tweet["date"],
                     "original": tweet["content"],
                     "translated": translated,
-                    "tweet_url": tweet["url"]
+                    "tweet_url": tweet["url"],
+                    "likes": tweet.get("likes", 0),
+                    "retweets": tweet.get("retweets", 0),
+                    "replies": tweet.get("replies", 0)
                 })
 
                 print(f"\n✅ @{tweet['username']}:\n{translated}\n")
