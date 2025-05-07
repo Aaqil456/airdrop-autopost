@@ -21,35 +21,58 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
     try:
         response = requests.get(url, headers=headers, params=querystring, timeout=30)
-        if response.status_code == 200:
-            data = response.json()
-
-            tweets_raw = data.get("data", [])
-
-            # ✅ Fix: Check kalau bukan list, print & return kosong
-            if not isinstance(tweets_raw, list):
-                print(f"❌ Unexpected format for tweets from @{username}:")
-                print(json.dumps(tweets_raw, indent=2))
-                return []
-
-            # ✅ Slice ikut jumlah max_tweets
-            tweets_raw = tweets_raw[:max_tweets]
-
-            tweets = []
-            for tweet in tweets_raw:
-                tweets.append({
-                    "username": username,
-                    "date": tweet.get("created_at", ""),
-                    "content": tweet.get("full_text", tweet.get("text", "")),
-                    "url": f"https://x.com/{username}/status/{tweet.get('id_str', '')}"
-                })
-            return tweets
-        else:
+        if response.status_code != 200:
             print(f"❌ RapidAPI Error {response.status_code}: {response.text}")
             return []
+
+        data = response.json()
+        tweets = []
+
+        # Parse nested tweet entries
+        instructions = data.get("user_result", {}).get("result", {}).get("timeline_response", {}) \
+                           .get("timeline", {}).get("instructions", [])
+
+        for instruction in instructions:
+            if instruction.get("__typename") == "TimelineAddEntries":
+                entries = instruction.get("entries", [])
+                for entry in entries:
+                    try:
+                        tweet_data = entry.get("content", {}) \
+                                          .get("itemContent", {}) \
+                                          .get("tweet_results", {}) \
+                                          .get("result", {})
+
+                        if not tweet_data:
+                            continue
+
+                        tweet_id = tweet_data.get("rest_id", "")
+                        legacy = tweet_data.get("legacy", {})
+                        text = legacy.get("full_text", legacy.get("text", ""))
+                        created_at = legacy.get("created_at", "")
+
+                        if not text:
+                            continue
+
+                        tweets.append({
+                            "username": username,
+                            "date": created_at,
+                            "content": text,
+                            "url": f"https://x.com/{username}/status/{tweet_id}"
+                        })
+
+                        if len(tweets) >= max_tweets:
+                            return tweets
+
+                    except Exception as parse_error:
+                        print(f"⚠️ Skipping entry due to error: {parse_error}")
+                        continue
+
+        return tweets
+
     except Exception as e:
         print(f"❌ Exception while fetching @{username}: {e}")
         return []
+
 
 # === STEP 2: Translate using Gemini 2.0 Flash ===
 def translate_text_gemini(text):
