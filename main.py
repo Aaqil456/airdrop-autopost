@@ -6,7 +6,7 @@ import requests
 
 # === ENV ===
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")  # Guna GitHub Secrets atau .env
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 
 # === STEP 1: Fetch Tweets via RapidAPI ===
 def fetch_tweets_rapidapi(username, max_tweets=3):
@@ -28,9 +28,9 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
         data = response.json()
         tweets = []
 
-        # Parse nested tweet entries
-        instructions = data.get("user_result", {}).get("result", {}).get("timeline_response", {}) \
-                           .get("timeline", {}).get("instructions", [])
+        instructions = data.get("user_result", {}).get("result", {}) \
+                           .get("timeline_response", {}).get("timeline", {}) \
+                           .get("instructions", [])
 
         for instruction in instructions:
             if instruction.get("__typename") == "TimelineAddEntries":
@@ -43,6 +43,7 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                                           .get("result", {})
 
                         if not tweet_data:
+                            print("⚠️ Empty or invalid tweet data — skipped.")
                             continue
 
                         tweet_id = tweet_data.get("rest_id", "")
@@ -51,7 +52,10 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                         created_at = legacy.get("created_at", "")
 
                         if not text:
+                            print("⚠️ No text found — skipped.")
                             continue
+
+                        print(f"✅ Extracted tweet: {text[:60]}...")
 
                         tweets.append({
                             "username": username,
@@ -72,7 +76,6 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
     except Exception as e:
         print(f"❌ Exception while fetching @{username}: {e}")
         return []
-
 
 # === STEP 2: Translate using Gemini 2.0 Flash ===
 def translate_text_gemini(text):
@@ -102,7 +105,7 @@ def translate_text_gemini(text):
 if __name__ == "__main__":
     usernames = [
         "flb_xyz"
-        # Tambah username lain jika mahu
+        # Tambah username lain jika perlu
     ]
 
     result_data = []
@@ -134,6 +137,6 @@ if __name__ == "__main__":
 
     print("✅ All tweets processed and saved to results.json")
 
-    # === Debug Output ===
+    # Debug Output
     print("\n📦 DEBUG OUTPUT (results.json):")
     print(json.dumps(final_result, ensure_ascii=False, indent=2))
