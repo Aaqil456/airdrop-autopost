@@ -9,7 +9,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 
 # === STEP 1: Fetch Tweets via RapidAPI ===
-def fetch_tweets_rapidapi(username, max_tweets=30):
+def fetch_tweets_rapidapi(username, max_tweets=3):
     url = "https://twttrapi.p.rapidapi.com/user-tweets"
     querystring = {"username": username}
     headers = {
@@ -26,11 +26,26 @@ def fetch_tweets_rapidapi(username, max_tweets=30):
             return []
 
         data = response.json()
+
+        # 🔍 Save raw JSON for inspection
+        with open(f"debug_{username}.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
         tweets = []
 
-        instructions = data.get("user_result", {}).get("result", {}) \
-                           .get("timeline_response", {}).get("timeline", {}) \
-                           .get("instructions", [])
+        # ✅ Try to extract instructions from both possible locations
+        possible_paths = [
+            data.get("user_result", {}).get("result", {}),
+            data.get("data", {}).get("user_result", {}).get("result", {})
+        ]
+
+        instructions = []
+        for path in possible_paths:
+            timeline = path.get("timeline_response", {}).get("timeline", {})
+            ins = timeline.get("instructions", [])
+            if ins:
+                instructions = ins
+                break
 
         print(f"🧪 Found {len(instructions)} instruction blocks")
 
@@ -96,7 +111,7 @@ def translate_text_gemini(text):
 
 # === MAIN EXECUTION ===
 if __name__ == "__main__":
-    usernames = ["flb_xyz","elonmusk"]
+    usernames = ["flb_xyz"]
     result_data = []
 
     for username in usernames:
