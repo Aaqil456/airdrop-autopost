@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-08 18:19:33",
+  "last_updated": "2025-05-08 19:11:32",
   "data": [
     {
       "id": "1920317828135333994",
@@ -82,6 +82,14 @@
         "https://pbs.twimg.com/media/GqSYkIvbAAA6HSi.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1919827090117165423"
+    },
+    {
+      "id": "1920549928671326455",
+      "text": "30 Days of Monad Testnet: Day 21\n\nToday we will be interacting with another popular DEX on the Monad testnet, @bebop_dex\n\n- Visit https://t.co/pH3WzkKGgG and connect your wallet\n- Swap some MON for USDC\n- Go to Send and send a tiny amount to someone random\n\nDone. What protocol do you want next?",
+      "images": [
+        "https://pbs.twimg.com/media/Gqcp-2FacAAhvTi.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1920549928671326455"
     }
   ]
 }
