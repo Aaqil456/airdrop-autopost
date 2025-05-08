@@ -62,21 +62,27 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
 
                         legacy = tweet_result.get("legacy", {})
                         text = legacy.get("full_text", legacy.get("text", ""))
+
+                        # === FIXED MEDIA EXTRACTION ===
+                        media = []
                         media_urls = []
 
-                        # Extract media if available
-                        extended_entities = legacy.get("extended_entities", {})
-                        media = extended_entities.get("media", [])
+                        if "extended_entities" in legacy and "media" in legacy["extended_entities"]:
+                            media = legacy["extended_entities"]["media"]
+                        elif "entities" in legacy and "media" in legacy["entities"]:
+                            media = legacy["entities"]["media"]
+
                         for m in media:
-                            media_url = m.get("media_url_https") or m.get("media_url")
-                            if media_url:
-                                media_urls.append(media_url)
+                            if m.get("type") == "photo":  # Only include images
+                                media_url = m.get("media_url_https") or m.get("media_url")
+                                if media_url:
+                                    media_urls.append(media_url)
 
                         if not text:
                             print("⚠️ No text found — skipped.")
                             continue
 
-                        print(f"✅ Extracted tweet: {text[:60]}...")
+                        print(f"✅ Extracted tweet: {text[:60]}... with {len(media_urls)} images")
 
                         tweets.append({
                             "text": text,
