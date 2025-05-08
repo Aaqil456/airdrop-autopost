@@ -35,7 +35,7 @@ def save_results(data):
     print("✅ All tweets processed and saved to results.json")
 
 # === Fetch Tweets ===
-def fetch_tweets_rapidapi(username, max_tweets=3):
+def fetch_tweets_rapidapi(username, max_tweets=10):
     url = "https://twttrapi.p.rapidapi.com/user-tweets"
     querystring = {"username": username}
     headers = {
