@@ -6,7 +6,6 @@ import requests
 import base64
 
 # === ENV ===
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 WP_URL = os.getenv("WP_API_URL")
 WP_USER = os.getenv("WP_USER")
@@ -107,32 +106,6 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
     except:
         return []
 
-# === Translate ===
-def translate_text_gemini(text):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
-    headers = {"Content-Type": "application/json"}
-    prompt = (
-        f"Translate the following tweet into Malay (Bahasa Melayu) only. "
-        f"make it sound like a 3rd person and instructional "
-        f"for the word (I) translate it into (kami) in malay "
-        f"Do not include English. Return just the translated version:\n\n\"{text}\""
-    )
-    body = {
-        "contents": [
-            {
-                "role": "user",
-                "parts": [{"text": prompt}]
-            }
-        ]
-    }
-    try:
-        res = requests.post(url, headers=headers, json=body)
-        if res.status_code == 200:
-            return res.json()['candidates'][0]['content']['parts'][0]['text']
-    except:
-        return None
-    return None
-
 # === WordPress Poster ===
 def post_to_wordpress(entry):
     credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
@@ -166,14 +139,14 @@ def post_to_wordpress(entry):
         except:
             pass
 
-    content_html = f"<p>{entry['translated']}</p>"
+    content_html = f"<p>{entry['text']}</p>"
     if uploaded_image_url:
         content_html = f"<img src='{uploaded_image_url}' alt='tweet image' /><br>" + content_html
     if entry.get("tweet_url"):
         content_html += f"<p>📌 Sumber: <a href='{entry['tweet_url']}'>{entry['tweet_url']}</a></p>"
 
     post_data = {
-        "title": entry["translated"][:60],
+        "title": entry["text"][:60],
         "content": content_html,
         "status": "private",
         "categories": [CATEGORY_ID]
@@ -199,23 +172,13 @@ if __name__ == "__main__":
                 print(f"⏭️ Skipped (already posted): {tweet['tweet_url']}")
                 continue
 
-            translated = translate_text_gemini(tweet["text"])
-            if translated:
-                post_entry = {
-                    "id": tweet["id"],
-                    "original": tweet["text"],
-                    "translated": translated,
-                    "images": tweet["images"],
-                    "tweet_url": tweet["tweet_url"]
-                }
-
-                success = post_to_wordpress(post_entry)
-                if success:
-                    print(f"✅ Posted: {tweet['tweet_url']}")
-                    result_data.append(post_entry)
-                    existing_ids.add(tweet["id"])
-                else:
-                    print(f"❌ Failed to post: {tweet['tweet_url']}")
+            success = post_to_wordpress(tweet)
+            if success:
+                print(f"✅ Posted: {tweet['tweet_url']}")
+                result_data.append(tweet)
+                existing_ids.add(tweet["id"])
+            else:
+                print(f"❌ Failed to post: {tweet['tweet_url']}")
 
     save_results(result_data)
     print("\n📦 All done.")
