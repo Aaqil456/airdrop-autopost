@@ -71,14 +71,28 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
                                             .get("result", {})
 
                         tweet_id = tweet_result.get("rest_id", "")
-                        screen_name = tweet_result.get("core", {}).get("user_result", {}).get("result", {}).get("legacy", {}).get("screen_name", username)
+                        screen_name = tweet_result.get("core", {}) \
+                            .get("user_result", {}) \
+                            .get("result", {}) \
+                            .get("legacy", {}) \
+                            .get("screen_name", username)
 
-                        # ✅ Robust full text extraction
+                        # ✅ Improved full text extraction with note tweets included
+                        note_text = tweet_result.get("note_tweet", {}) \
+                            .get("note_tweet_results", {}) \
+                            .get("result", {}) \
+                            .get("text")
+
                         tweet_legacy = tweet_result.get("legacy", {})
-                        retweeted_legacy = tweet_result.get("retweeted_status_result", {}).get("result", {}).get("legacy", {})
-                        quoted_legacy = tweet_result.get("quoted_status_result", {}).get("result", {}).get("legacy", {})
+                        retweeted_legacy = tweet_result.get("retweeted_status_result", {}) \
+                            .get("result", {}) \
+                            .get("legacy", {})
+                        quoted_legacy = tweet_result.get("quoted_status_result", {}) \
+                            .get("result", {}) \
+                            .get("legacy", {})
 
-                        text = tweet_legacy.get("full_text") or \
+                        text = note_text or \
+                               tweet_legacy.get("full_text") or \
                                retweeted_legacy.get("full_text") or \
                                quoted_legacy.get("full_text") or \
                                tweet_legacy.get("text", "")
