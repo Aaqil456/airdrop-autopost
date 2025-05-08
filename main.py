@@ -11,7 +11,7 @@ RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 WP_URL = os.getenv("WP_API_URL")
 WP_USER = os.getenv("WP_USER")
 WP_APP_PASSWORD = os.getenv("WP_APP_PASS")
-PANDUAN_CATEGORY_ID = 1395
+CATEGORY_ID = 1395
 RESULTS_FILE = "results.json"
 
 # === Load existing posted data
@@ -172,7 +172,7 @@ def post_to_wordpress(entry):
         "title": entry["translated"][:60],
         "content": content_html,
         "status": "private",
-        "categories": [PANDUAN_CATEGORY_ID]
+        "categories": [CATEGORY_ID]
     }
     if media_id:
         post_data["featured_media"] = media_id
