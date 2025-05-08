@@ -13,7 +13,6 @@ WP_APP_PASSWORD = os.getenv("WP_APP_PASS")
 CATEGORY_ID = 1401
 RESULTS_FILE = "results.json"
 
-# === Load existing posted data
 def load_existing_results():
     if os.path.exists(RESULTS_FILE):
         with open(RESULTS_FILE, "r", encoding="utf-8") as f:
@@ -23,7 +22,6 @@ def load_existing_results():
                 return []
     return []
 
-# === Save updated results
 def save_results(data):
     final_result = {
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -33,7 +31,6 @@ def save_results(data):
         json.dump(final_result, f, ensure_ascii=False, indent=2)
     print("✅ All tweets processed and saved to results.json")
 
-# === Fetch Tweets ===
 def fetch_tweets_rapidapi(username, max_tweets=10):
     url = "https://twttrapi.p.rapidapi.com/user-tweets"
     querystring = {"username": username}
@@ -76,16 +73,19 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
                         tweet_id = tweet_result.get("rest_id", "")
                         screen_name = legacy.get("screen_name", username)
 
-                        # ✅ Extract best available full text
-                        text = legacy.get("full_text") or \
-                               legacy.get("retweeted_status_result", {}).get("result", {}).get("legacy", {}).get("full_text") or \
-                               legacy.get("quoted_status_result", {}).get("result", {}).get("legacy", {}).get("full_text") or \
-                               legacy.get("text", "")
+                        # ✅ FIXED full text extraction from correct parents
+                        tweet_legacy = tweet_result.get("legacy", {})
+                        retweeted_legacy = tweet_result.get("retweeted_status_result", {}).get("result", {}).get("legacy", {})
+                        quoted_legacy = tweet_result.get("quoted_status_result", {}).get("result", {}).get("legacy", {})
 
-                        # === Extract media
+                        text = tweet_legacy.get("full_text") or \
+                               retweeted_legacy.get("full_text") or \
+                               quoted_legacy.get("full_text") or \
+                               tweet_legacy.get("text", "")
+
                         media_urls = []
-                        media = legacy.get("extended_entities", {}).get("media", []) or \
-                                legacy.get("entities", {}).get("media", [])
+                        media = tweet_legacy.get("extended_entities", {}).get("media", []) or \
+                                tweet_legacy.get("entities", {}).get("media", [])
                         for m in media:
                             if m.get("type") == "photo":
                                 media_url = m.get("media_url_https") or m.get("media_url")
@@ -112,7 +112,6 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
     except:
         return []
 
-# === WordPress Poster ===
 def post_to_wordpress(entry):
     credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
     token = base64.b64encode(credentials.encode()).decode()
@@ -163,7 +162,6 @@ def post_to_wordpress(entry):
     response = requests.post(f"{WP_URL}/posts", headers=headers, json=post_data)
     return response.status_code == 201
 
-# === MAIN ===
 if __name__ == "__main__":
     usernames = ["codeglitch"]
     existing = load_existing_results()
