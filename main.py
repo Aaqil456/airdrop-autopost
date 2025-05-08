@@ -140,7 +140,9 @@ def post_to_wordpress(entry):
         "Content-Type": "application/json"
     }
 
-    image_url = entry.get("images", [None])[0]
+    images = entry.get("images", [])
+    image_url = images[0] if images else None
+
     media_id = None
     uploaded_image_url = ""
 
