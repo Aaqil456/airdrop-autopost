@@ -73,10 +73,16 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
                                             .get("tweetResult", {}) \
                                             .get("result", {})
                         legacy = tweet_result.get("legacy", {})
-                        text = legacy.get("full_text", legacy.get("text", ""))
                         tweet_id = tweet_result.get("rest_id", "")
                         screen_name = legacy.get("screen_name", username)
 
+                        # ✅ Extract best available full text
+                        text = legacy.get("full_text") or \
+                               legacy.get("retweeted_status_result", {}).get("result", {}).get("legacy", {}).get("full_text") or \
+                               legacy.get("quoted_status_result", {}).get("result", {}).get("legacy", {}).get("full_text") or \
+                               legacy.get("text", "")
+
+                        # === Extract media
                         media_urls = []
                         media = legacy.get("extended_entities", {}).get("media", []) or \
                                 legacy.get("entities", {}).get("media", [])
