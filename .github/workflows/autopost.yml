@@ -2,8 +2,8 @@ name: Airdrop Scraper, Translate & Post
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 * * * *'  # Enable later if needed (every hour)
+  schedule:
+    - cron: '0 * * * *'  # Enable later if needed (every hour)
 
 permissions:
   contents: write
