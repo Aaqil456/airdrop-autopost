@@ -69,11 +69,11 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
                                             .get("content", {}) \
                                             .get("tweetResult", {}) \
                                             .get("result", {})
-                        legacy = tweet_result.get("legacy", {})
-                        tweet_id = tweet_result.get("rest_id", "")
-                        screen_name = legacy.get("screen_name", username)
 
-                        # ✅ FIXED full text extraction from correct parents
+                        tweet_id = tweet_result.get("rest_id", "")
+                        screen_name = tweet_result.get("core", {}).get("user_result", {}).get("result", {}).get("legacy", {}).get("screen_name", username)
+
+                        # ✅ Robust full text extraction
                         tweet_legacy = tweet_result.get("legacy", {})
                         retweeted_legacy = tweet_result.get("retweeted_status_result", {}).get("result", {}).get("legacy", {})
                         quoted_legacy = tweet_result.get("quoted_status_result", {}).get("result", {}).get("legacy", {})
@@ -83,6 +83,7 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
                                quoted_legacy.get("full_text") or \
                                tweet_legacy.get("text", "")
 
+                        # === Extract media (from the original tweet only)
                         media_urls = []
                         media = tweet_legacy.get("extended_entities", {}).get("media", []) or \
                                 tweet_legacy.get("entities", {}).get("media", [])
@@ -97,7 +98,7 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
 
                         tweets.append({
                             "id": tweet_id,
-                            "text": text,
+                            "text": text.strip(),
                             "images": media_urls,
                             "tweet_url": f"https://x.com/{screen_name}/status/{tweet_id}"
                         })
@@ -105,11 +106,13 @@ def fetch_tweets_rapidapi(username, max_tweets=10):
                         if len(tweets) >= max_tweets:
                             return tweets
 
-                    except:
+                    except Exception as e:
+                        print(f"[⚠️ Entry skipped due to error] {e}")
                         continue
 
         return tweets
-    except:
+    except Exception as e:
+        print(f"❌ Exception fetching tweets for @{username}: {e}")
         return []
 
 def post_to_wordpress(entry):
@@ -141,8 +144,8 @@ def post_to_wordpress(entry):
                     media = upload.json()
                     media_id = media.get("id")
                     uploaded_image_url = media.get("source_url")
-        except:
-            pass
+        except Exception as e:
+            print(f"⚠️ Failed to upload image: {e}")
 
     content_html = f"<p>{entry['text']}</p>"
     if uploaded_image_url:
@@ -151,8 +154,8 @@ def post_to_wordpress(entry):
         content_html += f"<p>📌 Sumber: <a href='{entry['tweet_url']}'>{entry['tweet_url']}</a></p>"
 
     post_data = {
-        "title": entry["text"][:60],
-        "content": content_html,
+        "title": entry["text"][:60].strip(),
+        "content": content_html.strip(),
         "status": "private",
         "categories": [CATEGORY_ID]
     }
