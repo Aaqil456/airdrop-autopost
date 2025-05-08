@@ -8,12 +8,33 @@ import base64
 # === ENV ===
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
-WP_URL = os.getenv("WP_API_URL")  # example: https://yourdomain.com/wp-json/wp/v2
+WP_URL = os.getenv("WP_API_URL")
 WP_USER = os.getenv("WP_USER")
 WP_APP_PASSWORD = os.getenv("WP_APP_PASS")
 PANDUAN_CATEGORY_ID = 1395
+RESULTS_FILE = "results.json"
 
-# === STEP 1: Fetch Tweets via RapidAPI ===
+# === Load existing posted data
+def load_existing_results():
+    if os.path.exists(RESULTS_FILE):
+        with open(RESULTS_FILE, "r", encoding="utf-8") as f:
+            try:
+                return json.load(f).get("data", [])
+            except:
+                return []
+    return []
+
+# === Save updated results
+def save_results(data):
+    final_result = {
+        "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "data": data
+    }
+    with open(RESULTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(final_result, f, ensure_ascii=False, indent=2)
+    print("✅ All tweets processed and saved to results.json")
+
+# === Fetch Tweets ===
 def fetch_tweets_rapidapi(username, max_tweets=3):
     url = "https://twttrapi.p.rapidapi.com/user-tweets"
     querystring = {"username": username}
@@ -22,20 +43,14 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
         "x-rapidapi-host": "twttrapi.p.rapidapi.com"
     }
 
-    print(f"📥 Fetching tweets from: @{username}")
-
     try:
         response = requests.get(url, headers=headers, params=querystring, timeout=30)
         if response.status_code != 200:
-            print(f"❌ RapidAPI Error {response.status_code}: {response.text}")
             return []
 
         data = response.json()
-
-        with open(f"debug_{username}.json", "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-
         tweets = []
+
         possible_paths = [
             data.get("user_result", {}).get("result", {}),
             data.get("data", {}).get("user_result", {}).get("result", {})
@@ -49,13 +64,9 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                 instructions = ins
                 break
 
-        print(f"🧪 Found {len(instructions)} instruction blocks")
-
         for instruction in instructions:
             if instruction.get("__typename") == "TimelineAddEntries":
                 entries = instruction.get("entries", [])
-                print(f"📦 Processing {len(entries)} entries from timeline")
-
                 for entry in entries:
                     try:
                         tweet_result = entry.get("content", {}) \
@@ -65,58 +76,45 @@ def fetch_tweets_rapidapi(username, max_tweets=3):
                         legacy = tweet_result.get("legacy", {})
                         text = legacy.get("full_text", legacy.get("text", ""))
                         tweet_id = tweet_result.get("rest_id", "")
-                        username = legacy.get("screen_name", username)
+                        screen_name = legacy.get("screen_name", username)
 
-                        # === Extract media ===
-                        media = []
                         media_urls = []
-
-                        if "extended_entities" in legacy and "media" in legacy["extended_entities"]:
-                            media = legacy["extended_entities"]["media"]
-                        elif "entities" in legacy and "media" in legacy["entities"]:
-                            media = legacy["entities"]["media"]
-
+                        media = legacy.get("extended_entities", {}).get("media", []) or \
+                                legacy.get("entities", {}).get("media", [])
                         for m in media:
                             if m.get("type") == "photo":
                                 media_url = m.get("media_url_https") or m.get("media_url")
                                 if media_url:
                                     media_urls.append(media_url)
 
-                        if not text:
-                            print("⚠️ No text found — skipped.")
+                        if not text or not tweet_id:
                             continue
 
-                        print(f"✅ Extracted tweet: {text[:60]}... with {len(media_urls)} images")
-
                         tweets.append({
+                            "id": tweet_id,
                             "text": text,
                             "images": media_urls,
-                            "tweet_url": f"https://x.com/{username}/status/{tweet_id}"
+                            "tweet_url": f"https://x.com/{screen_name}/status/{tweet_id}"
                         })
 
                         if len(tweets) >= max_tweets:
                             return tweets
 
-                    except Exception as parse_error:
-                        print(f"⚠️ Skipping entry due to error: {parse_error}")
+                    except:
                         continue
 
         return tweets
-
-    except Exception as e:
-        print(f"❌ Exception while fetching @{username}: {e}")
+    except:
         return []
 
-# === STEP 2: Translate using Gemini 2.0 Flash ===
+# === Translate ===
 def translate_text_gemini(text):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
     headers = {"Content-Type": "application/json"}
     prompt = (
         f"Translate the following tweet into Malay (Bahasa Melayu) only. "
-        f"Do not include English. Return just the translated version, "
-        f"as a single sentence or paragraph only:\n\n\"{text}\""
+        f"Do not include English. Return just the translated version:\n\n\"{text}\""
     )
-
     body = {
         "contents": [
             {
@@ -125,17 +123,15 @@ def translate_text_gemini(text):
             }
         ]
     }
-
     try:
         res = requests.post(url, headers=headers, json=body)
         if res.status_code == 200:
             return res.json()['candidates'][0]['content']['parts'][0]['text']
-        else:
-            return f"❌ Gemini API Error: {res.status_code} — {res.text}"
-    except Exception as e:
-        return f"❌ Gemini Exception: {e}"
+    except:
+        return None
+    return None
 
-# === STEP 3: Push to WordPress ===
+# === WordPress Poster ===
 def post_to_wordpress(entry):
     credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
     token = base64.b64encode(credentials.encode()).decode()
@@ -163,8 +159,8 @@ def post_to_wordpress(entry):
                     media = upload.json()
                     media_id = media.get("id")
                     uploaded_image_url = media.get("source_url")
-        except Exception as e:
-            print(f"[Image Upload Error] {e}")
+        except:
+            pass
 
     content_html = f"<p>{entry['translated']}</p>"
     if uploaded_image_url:
@@ -178,51 +174,45 @@ def post_to_wordpress(entry):
         "status": "private",
         "categories": [PANDUAN_CATEGORY_ID]
     }
-
     if media_id:
         post_data["featured_media"] = media_id
 
     response = requests.post(f"{WP_URL}/posts", headers=headers, json=post_data)
-    print(f"📤 WordPress Post Status: {response.status_code}")
     return response.status_code == 201
 
-# === MAIN EXECUTION ===
+# === MAIN ===
 if __name__ == "__main__":
     usernames = ["flb_xyz"]
-    result_data = []
+    existing = load_existing_results()
+    existing_ids = set(e["id"] for e in existing if "id" in e)
+    result_data = existing.copy()
 
     for username in usernames:
         tweets = fetch_tweets_rapidapi(username)
 
         for tweet in tweets:
+            if tweet["id"] in existing_ids:
+                print(f"⏭️ Skipped (already posted): {tweet['tweet_url']}")
+                continue
+
             translated = translate_text_gemini(tweet["text"])
-            if not translated.startswith("❌"):
+            if translated:
                 post_entry = {
+                    "id": tweet["id"],
                     "original": tweet["text"],
                     "translated": translated,
                     "images": tweet["images"],
                     "tweet_url": tweet["tweet_url"]
                 }
-                result_data.append(post_entry)
 
-                print(f"\n✅ Translated:\n{translated}\n")
-
-                # === Push to WordPress ===
                 success = post_to_wordpress(post_entry)
                 if success:
-                    print("✅ Draft posted to WordPress.\n")
+                    print(f"✅ Posted: {tweet['tweet_url']}")
+                    result_data.append(post_entry)
+                    existing_ids.add(tweet["id"])
                 else:
-                    print("❌ Failed to post to WordPress.\n")
+                    print(f"❌ Failed to post: {tweet['tweet_url']}")
 
-    # Simpan ke JSON
-    final_result = {
-        "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "data": result_data
-    }
-
-    with open("results.json", "w", encoding="utf-8") as f:
-        json.dump(final_result, f, ensure_ascii=False, indent=2)
-
-    print("✅ All tweets processed and saved to results.json")
-    print("\n📦 DEBUG OUTPUT (results.json):")
-    print(json.dumps(final_result, ensure_ascii=False, indent=2))
+    save_results(result_data)
+    print("\n📦 All done.")
+    print(json.dumps(result_data, indent=2, ensure_ascii=False))
