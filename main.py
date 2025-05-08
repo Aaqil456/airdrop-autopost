@@ -113,6 +113,7 @@ def translate_text_gemini(text):
     headers = {"Content-Type": "application/json"}
     prompt = (
         f"Translate the following tweet into Malay (Bahasa Melayu) only. "
+        f"for the word (I) translate it into (kami) in malay "
         f"Do not include English. Return just the translated version:\n\n\"{text}\""
     )
     body = {
