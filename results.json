@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-09 01:08:01",
+  "last_updated": "2025-05-09 03:06:20",
   "data": [
     {
       "id": "1920317828135333994",
@@ -96,6 +96,14 @@
       "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 21\n\nToday we will be interacting with another popular DEX on the Monad testnet, @bebop_dex\n\n- Vi…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1920642556272238880"
+    },
+    {
+      "id": "1920666190814605428",
+      "text": "30 Days of HyperEVM: Day 21\n\nToday we are diving into The Farm, one of the only games currently live on HyperEVM\n\n- Visit https://t.co/PxtPrvTznr and connect your wallet\n- Choose a map\n- Select Fish and start fishing\n- Continue playing the game and exploring the map\n\nI hope to see more games in development on the network",
+      "images": [
+        "https://pbs.twimg.com/media/GqeTuIHbcAItOK6.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1920666190814605428"
     }
   ]
 }
