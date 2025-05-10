@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-10 01:05:46",
+  "last_updated": "2025-05-10 03:00:02",
   "data": [
     {
       "id": "1920317828135333994",
@@ -189,6 +189,24 @@
         "https://pbs.twimg.com/media/Gqi2O8JbcAEH_mR.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1920985611915456927"
+    },
+    {
+      "id": "1921022651512090644",
+      "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 22\n\nToday we are exploring a community building protocol on the Monad testnet: @TalentumID\n\n- Vi…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1921022651512090644"
+    },
+    {
+      "id": "1921017552253448235",
+      "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 22\n\nFor this edition, let's explore a DEX aggregator and DeFi tool built on HyperEVM, LiquidSwap (a p…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1921017552253448235"
+    },
+    {
+      "id": "1921014956541309432",
+      "text": "RT @flb_xyz: Here is a rare Camp Network interaction to do ($30m funding)\n\n&lt;4,000 users have completed\n\n- Visit https://t.co/8WDH52gq1U and…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1921014956541309432"
     }
   ]
 }
