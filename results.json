@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-10 16:15:38",
+  "last_updated": "2025-05-10 17:11:32",
   "data": [
     {
       "id": "1920317828135333994",
@@ -271,6 +271,36 @@
         "https://pbs.twimg.com/media/GqmViqHbcAMSz2v.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1921231141614637204"
+    },
+    {
+      "id": "1921250196161499610",
+      "text": "30 Days of HyperEVM: Day 23\n\nAs mentioned yesterday, today we will focus on exploring @LiquidLaunchHL which has less than 3,000 users!!\n\n- Visit https://t.co/WaVhzNw2Uj and connect your wallet\n- Trade at least one available token (can sell after a few minutes)\n- Go to Create and fill in details to create a token (you can choose whether to bond to KittenSwap or HyperSwap)\n\nOnly one week left until this series wraps up! I will have to consider starting a new one after this : )",
+      "images": [
+        "https://pbs.twimg.com/media/Gqmm3uKbcAIJff_.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921250196161499610"
+    },
+    {
+      "id": "1921247928766919059",
+      "text": "I've consolidated all my various BTC LSTs from different DeFi protocols and from the Berachain vaults into LBTC\n\nThis is because @Lombard_Finance has the main tokenless BTC LST left (and the biggest)\n\nThe question for me now is, where can I deposit this for the best yield?\n\nI was thinking about doing the Bitcoin Sonic vault for the 4x multiplier and the 2-in-1",
+      "images": [
+        "https://pbs.twimg.com/media/Gqmkz1CbcAQF__C.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921247928766919059"
+    },
+    {
+      "id": "1921244591996760409",
+      "text": "An update on my @sophon journey:\n\n🔹 594 SP earned\n🔹 Earning around ~19 SP a day from a $1.1k deposit\n\nNow there isn't much to do on Sophon BUT there are a few things going for it:\n\n1. Elastic chain/ZK stack narrative\n2. $45m in funding\n3. Kaito leaderboard (positive effect whether you like it or not)\n\nFor those that are not familiar with Sophon it is a network centered around native account abstraction, paymasters for gasless transactions, instant finality, and seamless interoperability within the Elastic Chain ecosystem",
+      "images": [
+        "https://pbs.twimg.com/media/GqmhxhXaYAAUjkA.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921244591996760409"
+    },
+    {
+      "id": "1921241305327562914",
+      "text": "The @Humanityprot update is a little sketchy...\n\nAfter months of no updates and an invalid RPC, they released an updated version of their protocol but it was really just a new UI\n\nThey said: \"More features are dropping soon, including palm scanning and full onboarding as we roll out Phase 2 in iterations.\"\n\nThat statement does not contain a single new thing as palm scanning has been in discussion for a long time and full onboarding/Phase 2 is extremely vague",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1921241305327562914"
     }
   ]
 }
