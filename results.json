@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-11 16:15:14",
+  "last_updated": "2025-05-11 17:11:12",
   "data": [
     {
       "id": "1920317828135333994",
@@ -393,6 +393,22 @@
       "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 23\n\nFor this activity we will be diving into a DEX building on Monad, @CrystalExch\n\n- Visit http…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1921347052895895736"
+    },
+    {
+      "id": "1921606958785982466",
+      "text": "30 Days of HyperEVM: Day 24\n\nToday we are diving into a brand new update: LayerZero's new collaboration with Hyperliquid\n\n- Visit https://t.co/r2Z3ir6rSR and connect your wallet\n- There are a number of tokens you can bridge to HyperEVM, I used USDe from Scroll as an example\n- Bridge your funds\n\nI think this collaboration will allow for a lot more tokens to be bridged to HyperEVM, now we just need the token teams and DEXs to work together in building liquidity for these tokens on the network",
+      "images": [
+        "https://pbs.twimg.com/media/GqrrWGRa4AAAhk9.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921606958785982466"
+    },
+    {
+      "id": "1921605705808928797",
+      "text": "30 Days of Monad Testnet: Day 24\n\nToday we are interacting with a DEX aggregator, Rubic, that allows for a 2-in-1 by also using iZUMi\n\n- Visit https://t.co/7pAGYe7UBN and connect your wallet\n- Swap some MON for USDT\n- Use a low amount as the liquidity is low and slippage is high\n\nThat's all to do on Rubic for now, hopefully they integrate more pairs and DEXs",
+      "images": [
+        "https://pbs.twimg.com/media/GqrqNJAasAAaxBx.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921605705808928797"
     }
   ]
 }
