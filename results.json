@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-11 22:12:35",
+  "last_updated": "2025-05-11 23:12:38",
   "data": [
     {
       "id": "1920317828135333994",
@@ -409,6 +409,18 @@
         "https://pbs.twimg.com/media/GqrqNJAasAAaxBx.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1921605705808928797"
+    },
+    {
+      "id": "1921699388126294106",
+      "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 24\n\nToday we are diving into a brand new update: LayerZero's new collaboration with Hyperliquid\n\n- Vi…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1921699388126294106"
+    },
+    {
+      "id": "1921696912400675077",
+      "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 24\n\nToday we are interacting with a DEX aggregator, Rubic, that allows for a 2-in-1 by also usin…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1921696912400675077"
     }
   ]
 }
