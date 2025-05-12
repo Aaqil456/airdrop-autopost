@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-12 14:14:48",
+  "last_updated": "2025-05-12 15:16:43",
   "data": [
     {
       "id": "1920317828135333994",
@@ -421,6 +421,22 @@
       "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 24\n\nToday we are interacting with a DEX aggregator, Rubic, that allows for a 2-in-1 by also usin…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1921696912400675077"
+    },
+    {
+      "id": "1921937448650817817",
+      "text": "30 Days of HyperEVM: Day 25\n\nAfter looking into what is likely HyperEVM's biggest integration to date, we are now exploring some BTCFi on the network\n\n- Visit https://t.co/KzGDQNxCrV and connect your wallet\n- Go to SolvBTC and select HyperEVM\n- Deposit a tiny amount of UBTC for SolvBTC (I would rather hold UBTC but am doing it for the new unique transaction)\n- If you need UBTC you can use a DEX like HyperSwap or Kittenswap\n\nThat's it for today, let's make these last 5 days count!",
+      "images": [
+        "https://pbs.twimg.com/media/GqwX7BPbcAATwsB.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921937448650817817"
+    },
+    {
+      "id": "1921936125721227415",
+      "text": "30 Days of Monad Testnet: Day 25\n\nToday we are looking at a permisionless prediction market on Monad: @tadle_com\n\n- Visit https://t.co/enVyaZYhYI and connect your wallet\n- Select Portfolio and Top up your wallet\n- Place bets on live markets\n- Go to dashboard --> portfolio and then create your own market\n\nThat's it for today, only 5 days left of this series now!",
+      "images": [
+        "https://pbs.twimg.com/media/GqwWuC0aAAAGV0e.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1921936125721227415"
     }
   ]
 }
