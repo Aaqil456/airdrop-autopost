@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-12 22:13:39",
+  "last_updated": "2025-05-12 23:13:17",
   "data": [
     {
       "id": "1920317828135333994",
@@ -471,6 +471,12 @@
       "text": "RT @flb_xyz: Fogo has a great effort-to-result payoff\n\nI have been telling you to start interacting with Fogo posts and this shows that you…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922046677768405412"
+    },
+    {
+      "id": "1922059276706849028",
+      "text": "RT @flb_xyz: Farcaster x Monad alpha\n\nMonad testnet tokens were airdropped to 77,000 Farcaster accounts (based on how active the accounts a…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922059276706849028"
     }
   ]
 }
