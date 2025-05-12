@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-12 20:15:58",
+  "last_updated": "2025-05-12 21:13:14",
   "data": [
     {
       "id": "1920317828135333994",
@@ -453,6 +453,18 @@
         "https://pbs.twimg.com/media/Gqwyu2vaYAAEr7n.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1921966924151587105"
+    },
+    {
+      "id": "1922029118247600505",
+      "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 25\n\nToday we are looking at a permisionless prediction market on Monad: @tadle_com\n\n- Visit http…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922029118247600505"
+    },
+    {
+      "id": "1922029047435165911",
+      "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 25\n\nAfter looking into what is likely HyperEVM's biggest integration to date, we are now exploring so…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922029047435165911"
     }
   ]
 }
