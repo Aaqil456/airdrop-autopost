@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-13 22:14:02",
+  "last_updated": "2025-05-13 23:13:35",
   "data": [
     {
       "id": "1920317828135333994",
@@ -554,6 +554,26 @@
         "https://pbs.twimg.com/media/Gq29rW6awAA5bJg.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1922401171840631133"
+    },
+    {
+      "id": "1922429263871119536",
+      "text": "Don't miss this UNDERFARMED 2-in-1 airdrop\n\nHibachi, a ZK Proof focused perp dex with $5m funding, is one of the first protocols to use Risc Zero's Boundless ZK technology ($52m funding)\n\nTo get started, you should sign up for Hibachi: https://t.co/aBQVk4azHC\n\nI'm in the top 150 users with less than $100k volume traded on the platform which speaks to how underfarmed this has been\n\nStart placing some trades and climb the leaderboard!!",
+      "images": [
+        "https://pbs.twimg.com/media/Gq3XOfGbsAA9DUR.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1922429263871119536"
+    },
+    {
+      "id": "1922425525806760292",
+      "text": "Multipli's S1 has come to a close and if I remember correctly TGE should come after Season 2\n\nThere are some big updates here too:\n\n• 30% of total ORBs will be distributed in S2\n• xBTC is launching providing you yield on BTC\n• More DeFi integrations\n• Launch of DeFi’s first scalable yield vault on tokenized gold",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922425525806760292"
+    },
+    {
+      "id": "1922416904289059312",
+      "text": "The coolest thing about the Pectra upgrade to me is the premise of 'gasless transactions'\n\nCircle is already stepping up to the plate here with Circle Paymaster\n\nIt is live on testnets and in production for supported chains. It determines that a sender has enough USDC to cover fees and pays the gas on their behalf\n\nHere’s what’s possible now:\n\n• USDC-first onboarding – Fund a new wallet with USDC and start transacting immediately\n\n• Frictionless dApp flows – Remove token swap steps just to pay gas\n\n• Simplified developer integration – No need to deploy smart accounts or manage EOA-to-SCW transitions\n\n• Global inclusivity – Onboard users who don’t have access to native tokens or exchanges",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922416904289059312"
     }
   ]
 }
