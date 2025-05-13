@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-13 15:14:35",
+  "last_updated": "2025-05-13 16:18:15",
   "data": [
     {
       "id": "1920317828135333994",
@@ -492,6 +492,12 @@
       "text": "RT @flb_xyz: Man, @avantisfi is on fire recently.\n\n• Premiere perp dex on base\n• Backed by Base, Pantera\n• Over $6.5B in volume across 30,0…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922245550109556744"
+    },
+    {
+      "id": "1922315264714252626",
+      "text": "30 Days of Monad Testnet: Day 26\n\nToday we are diving into one of the larger non-native DEXs on Monad, @LFJ_gg\n\n- Visit https://t.co/YDFKqjbn9T and connect your wallet\n- Swap some MON into USDC\n- Go to Pool\n- Provide liquidity to MON/USDC pool\n\nNice and easy today, there are so many DEXs to interact with so tomorrow we might look at exploring an aggregator ;)",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922315264714252626"
     }
   ]
 }
