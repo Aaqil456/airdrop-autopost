@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-13 17:13:05",
+  "last_updated": "2025-05-13 18:20:02",
   "data": [
     {
       "id": "1920317828135333994",
@@ -498,6 +498,14 @@
       "text": "30 Days of Monad Testnet: Day 26\n\nToday we are diving into one of the larger non-native DEXs on Monad, @LFJ_gg\n\n- Visit https://t.co/YDFKqjbn9T and connect your wallet\n- Swap some MON into USDC\n- Go to Pool\n- Provide liquidity to MON/USDC pool\n\nNice and easy today, there are so many DEXs to interact with so tomorrow we might look at exploring an aggregator ;)",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922315264714252626"
+    },
+    {
+      "id": "1922353246146068806",
+      "text": "30 Days of HyperEVM: Day 26\n\nToday we are diving into a multi-chain protocol live on HyperEVM, @TimeswapLabs\n\n- Visit https://t.co/epcboF1Dde and connect your wallet\n- Click on a wHYPE pool and lend out some tokens\n- Select the same pool and add some wHYPE to the liquidity\n\nThat's it for Timeswap, nothing too flashy! Also, you can use Timeswap to interact with the Monad testnet!",
+      "images": [
+        "https://pbs.twimg.com/media/Gq2SFtAagAAHVud.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1922353246146068806"
     }
   ]
 }
