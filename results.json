@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-13 23:13:35",
+  "last_updated": "2025-05-14 01:08:16",
   "data": [
     {
       "id": "1920317828135333994",
@@ -574,6 +574,12 @@
       "text": "The coolest thing about the Pectra upgrade to me is the premise of 'gasless transactions'\n\nCircle is already stepping up to the plate here with Circle Paymaster\n\nIt is live on testnets and in production for supported chains. It determines that a sender has enough USDC to cover fees and pays the gas on their behalf\n\nHere’s what’s possible now:\n\n• USDC-first onboarding – Fund a new wallet with USDC and start transacting immediately\n\n• Frictionless dApp flows – Remove token swap steps just to pay gas\n\n• Simplified developer integration – No need to deploy smart accounts or manage EOA-to-SCW transitions\n\n• Global inclusivity – Onboard users who don’t have access to native tokens or exchanges",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922416904289059312"
+    },
+    {
+      "id": "1922444427731337553",
+      "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 26\n\nToday we are diving into a multi-chain protocol live on HyperEVM, @TimeswapLabs\n\n- Visit https://…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922444427731337553"
     }
   ]
 }
