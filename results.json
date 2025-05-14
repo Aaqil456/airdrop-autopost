@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-14 16:17:35",
+  "last_updated": "2025-05-14 17:13:04",
   "data": [
     {
       "id": "1920317828135333994",
@@ -628,6 +628,15 @@
       "text": "RT @flb_xyz: The coolest thing about the Pectra upgrade to me is the premise of 'gasless transactions'\n\nCircle is already stepping up to th…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922509816842616979"
+    },
+    {
+      "id": "1922700497703809175",
+      "text": "30 Days of Monad Testnet: Day 27\n\nAs mentioned, today we will be looking at a DEX aggregator building on Monad: @mace_ag\n\n- Visit https://t.co/Gb5CVmjX0T and connect your wallet\n- Swap MON into another token like USDT\n- You can click the hops to see what trades are being done (for this example it was using Kuru and Monadex, making this a 3-in-1!)\n\nDEX aggregators are a great way to get multi-protocol interactions with minimal effort so I recommend checking it out",
+      "images": [
+        "https://pbs.twimg.com/media/Gq7N6SjagAAk-_m.jpg",
+        "https://pbs.twimg.com/media/Gq7N6dHaAAEnP97.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1922700497703809175"
     }
   ]
 }
