@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-14 17:13:04",
+  "last_updated": "2025-05-14 18:17:48",
   "data": [
     {
       "id": "1920317828135333994",
@@ -637,6 +637,16 @@
         "https://pbs.twimg.com/media/Gq7N6dHaAAEnP97.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1922700497703809175"
+    },
+    {
+      "id": "1922702294434578826",
+      "text": "30 Days of HyperEVM: Day 27\n\nToday we are going back to revisit HyperSwap with the new tokens that are bridged over using LayerZero's Hyperbridge (https://t.co/oULe71jIPq)\n\n- Visit https://t.co/T1ds2vJBhT and connect your wallet\n- Swap USDe and USDT0 tokens to build volume and earn points\n- Provide some liquidity to USDe/USDT0 pool (earns 18% APR)\n- Go to Earn --> Stake and also put a little HYPE into hbHYPE, @0xHyperBeat's new LST on the protocol\n\nThat's it for now, I recommend remaining active on the large native DEXs like HyperSwap and Kittenswap",
+      "images": [
+        "https://pbs.twimg.com/media/Gq7PinDaAAE1Y2g.jpg",
+        "https://pbs.twimg.com/media/Gq7PiyJbAAAH_hA.jpg",
+        "https://pbs.twimg.com/media/Gq7Pi-zbcAA1-w6.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1922702294434578826"
     }
   ]
 }
