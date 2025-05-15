@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-15 07:14:01",
+  "last_updated": "2025-05-15 08:19:27",
   "data": [
     {
       "id": "1920317828135333994",
@@ -669,6 +669,12 @@
         "https://pbs.twimg.com/media/Gq9G528aAAEBi4_.png"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1922833528347304293"
+    },
+    {
+      "id": "1922925265614930052",
+      "text": "RT @flb_xyz: Early Farcaster x Monad Alpha (time-sensitive)\n\nHere are 3 Warpcast mini-apps to interact with using MON tokens\n\n1. MoMoney\n•…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922925265614930052"
     }
   ]
 }
