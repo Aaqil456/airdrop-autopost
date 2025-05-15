@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-14 23:11:57",
+  "last_updated": "2025-05-15 01:05:51",
   "data": [
     {
       "id": "1920317828135333994",
@@ -653,6 +653,12 @@
       "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 27\n\nAs mentioned, today we will be looking at a DEX aggregator building on Monad: @mace_ag\n\n- Vi…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922791815650177295"
+    },
+    {
+      "id": "1922794247033585683",
+      "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 27\n\nToday we are going back to revisit HyperSwap with the new tokens that are bridged over using Laye…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1922794247033585683"
     }
   ]
 }
