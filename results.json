@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-15 16:18:58",
+  "last_updated": "2025-05-15 17:13:08",
   "data": [
     {
       "id": "1920317828135333994",
@@ -675,6 +675,31 @@
       "text": "RT @flb_xyz: Early Farcaster x Monad Alpha (time-sensitive)\n\nHere are 3 Warpcast mini-apps to interact with using MON tokens\n\n1. MoMoney\n•…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1922925265614930052"
+    },
+    {
+      "id": "1923059302639730843",
+      "text": "The Farcaster team is literally telling us how to earn airdrops, we just have to listen\n\nThis list of tasks is really straight-forward to follow, here is my advice for each step\n\n1. Active on Farcaster\n• Even if you are not on the weekly leaderboard, CROSSPOST! It takes minimal effort and you should be crossposting to both Warpcast and Hey at the least\n\n2. Funded Wallet\n• The wording is a little ambiguous here so I would make sure to have at least $10 of USDC AND ETH in your Warpcast wallet\n\n3. At least 1x transaction\n• A key section here is at least, I would recommend doing more than 1 transaction, test new mini apps and have fun\n\n4. Use mini apps daily\n• Self-explanatory, just explore and have fun. If you are lazy you could even just do the Monad testnet wheel daily and leave it at that (would recommend using live mainnets too though)",
+      "images": [
+        "https://pbs.twimg.com/media/GrAUPq3aAAAPGcH.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923059302639730843"
+    },
+    {
+      "id": "1923056377393729808",
+      "text": "30 Days of HyperEVM: Day 28\n\nLet's have some fun by exploring a P2E (play-to-earn) game on Hyperliquid today, @GenesyHL\n\n- Swap for at least 1 $GENESY  (~$1.25) on HyperSwap\n- Visit https://t.co/fkCvbCrh6r and connect your wallet\n- Purchase a component (the cheapest will use up your 1 token)\n- Click Attack and try to hack other's components\n- Lastly, you can buy shields to protect yourself from attacks\n\nThat's all, it's a decently fun simulator and you can come back once or twice a day to use up your attacks (+ buy extra components if you would like)",
+      "images": [
+        "https://pbs.twimg.com/media/GrARlGVaAAEBCIz.jpg",
+        "https://pbs.twimg.com/media/GrARlVbaAAEv9Lj.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923056377393729808"
+    },
+    {
+      "id": "1923052782237741303",
+      "text": "30 Days of Monad Testnet: Day 28\n\nAfter taking a look at the Mace aggregator yesterday, let us use another native DEX aggregator, @monorail_xyz\n\n- Visit https://t.co/DXFN2L4Ja6 and connect your wallet\n- Swap tokens from MON to USDC or one of the 15,000+ other supported tokens\n\nThis is a great way to interact with multiple protocols, e.g. my swap used both Monorail and OctoSwap",
+      "images": [
+        "https://pbs.twimg.com/media/GrAOUGIaAAImYnG.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923052782237741303"
     }
   ]
 }
