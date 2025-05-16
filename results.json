@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-16 20:15:24",
+  "last_updated": "2025-05-16 21:12:57",
   "data": [
     {
       "id": "1920317828135333994",
@@ -753,6 +753,23 @@
       "text": "RT @flb_xyz: Less than 16,000 users have completed these Camp Network interactions ($30m funding)\n\nIf you haven't started on the Camp testn…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1923257515267195166"
+    },
+    {
+      "id": "1923475161086558649",
+      "text": "30 Days of HyperEVM: Day 29\n\nToday I want to focus more on the ability to track positions and monitor your holdings on HyperEVM\n\n- Visit https://t.co/oiLUZWfS93\n- Paste your wallet address or HL domain\n- Wait for everything to load\n\nThis lets you track the majority of DeFi apps and your respective positions. It is a great tool and one I use actively as most wallets don't really support HyperEVM currently",
+      "images": [
+        "https://pbs.twimg.com/media/GrGOdxFaAAMofmF.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923475161086558649"
+    },
+    {
+      "id": "1923473702810943906",
+      "text": "30 Days of Monad Testnet: Day 29\n\nWe are exploring a debt focused protocol on the Monad testnet today: @covenantFi\n\n- Visit https://t.co/xMTvQ0hjox and connect your wallet\n- Select one of the available markets (can use one of the many DEXs we have covered to get tokens if needed)\n- Use the token to mint Boost and Yield Coins\n- Hold the coins until maturity or swap\n\nThat's all, only one more day left of this series, hope you enjoyed!!!",
+      "images": [
+        "https://pbs.twimg.com/media/GrGNIlsaAAEJCu_.jpg",
+        "https://pbs.twimg.com/media/GrGNI4OasAANpCz.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923473702810943906"
     }
   ]
 }
