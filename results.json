@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-16 04:18:29",
+  "last_updated": "2025-05-16 05:14:58",
   "data": [
     {
       "id": "1920317828135333994",
@@ -741,6 +741,12 @@
         "https://pbs.twimg.com/media/GrB0MHwaAAANOLE.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1923164795320271284"
+    },
+    {
+      "id": "1923244686963245280",
+      "text": "RT @flb_xyz: Here is an update on my Abstract badge progess\n\nI have earned a total of 16 badges on Abstract (having missed a couple of the…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1923244686963245280"
     }
   ]
 }
