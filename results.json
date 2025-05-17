@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-17 22:12:14",
+  "last_updated": "2025-05-17 23:12:35",
   "data": [
     {
       "id": "1920317828135333994",
@@ -832,6 +832,12 @@
       "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 30\n\nWow. It has been a journey. This post marks the last day of my HyperEVM exploration series. To ce…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1923863779676389807"
+    },
+    {
+      "id": "1923876525004529767",
+      "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 30\n\nThirty. Days. Of. Monad. Done.\n\nTo everyone that has followed my journey in exploring the Mo…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1923876525004529767"
     }
   ]
 }
