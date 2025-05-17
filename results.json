@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-17 01:07:30",
+  "last_updated": "2025-05-17 03:03:10",
   "data": [
     {
       "id": "1920317828135333994",
@@ -786,6 +786,18 @@
         "https://pbs.twimg.com/media/GrGp65HaAAQfwqD.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1923505347739910585"
+    },
+    {
+      "id": "1923566850128085155",
+      "text": "RT @flb_xyz: 30 Days of HyperEVM: Day 29\n\nToday I want to focus more on the ability to track positions and monitor your holdings on HyperEV…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1923566850128085155"
+    },
+    {
+      "id": "1923566835800428657",
+      "text": "RT @flb_xyz: 30 Days of Monad Testnet: Day 29\n\nWe are exploring a debt focused protocol on the Monad testnet today: @covenantFi\n\n- Visit ht…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1923566835800428657"
     }
   ]
 }
