@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-17 15:12:42",
+  "last_updated": "2025-05-17 16:15:40",
   "data": [
     {
       "id": "1920317828135333994",
@@ -810,6 +810,14 @@
       "text": "RT @flb_xyz: Less than 10,000 users have completed the following Camp Network ($30m funding) quests\n\nIf you haven't started on the Camp tes…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1923609614937149609"
+    },
+    {
+      "id": "1923771250394136700",
+      "text": "30 Days of HyperEVM: Day 30\n\nWow. It has been a journey. This post marks the last day of my HyperEVM exploration series. To celebrate we will take it back to the fundamentals and the project that inspired this series: Hyperliquid.\n\n- Visit https://t.co/TWdmaFtG2Q and connect your wallet\n- Deposit USDC from Arbitrum\n- Place a trade\n- Deposit some funds into the HLP\n- Transfer some USDC to Spot\n- Buy a little HYPE\n- Go to Stake and stake your HYPE tokens\n\nThank you so much to everyone that tuned in to the daily updates and followed along, I look forward to doing more stuff like this in the future!",
+      "images": [
+        "https://pbs.twimg.com/media/GrKbwa4aAAQO8OX.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923771250394136700"
     }
   ]
 }
