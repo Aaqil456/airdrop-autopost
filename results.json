@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-17 16:15:40",
+  "last_updated": "2025-05-17 17:11:14",
   "data": [
     {
       "id": "1920317828135333994",
@@ -818,6 +818,14 @@
         "https://pbs.twimg.com/media/GrKbwa4aAAQO8OX.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1923771250394136700"
+    },
+    {
+      "id": "1923785348473291050",
+      "text": "30 Days of Monad Testnet: Day 30\n\nThirty. Days. Of. Monad. Done.\n\nTo everyone that has followed my journey in exploring the Monad ecosystem, it has been a blast and you should make sure to remain active on a lot of the covered protocols\n\nFor the final day I want to leave you with a resource that I wrote a while ago to help further explore the Monad ecosystem\n\nHere is a post that outlines 100+ protocols and projects building on Monad and how you can interact: https://t.co/ZL2Tu7FiRA",
+      "images": [
+        "https://pbs.twimg.com/media/GrKokrlbQAAQyz1.png"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1923785348473291050"
     }
   ]
 }
