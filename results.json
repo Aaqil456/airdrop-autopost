@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-21 19:11:14",
+  "last_updated": "2025-05-21 20:15:35",
   "data": [
     {
       "id": "1920317828135333994",
@@ -1127,6 +1127,12 @@
         "https://pbs.twimg.com/media/GrfaWx_aYAA1ghh.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1925247453366034826"
+    },
+    {
+      "id": "1925281051452350665",
+      "text": "This is wonderful news for DeFi\n\nLow ETH supply means a few things:\n• ETH moved to cold wallets for long-term storage\n• ETH moved into DeFi for yield farming, trading, etc.\n\nIn general, it has always felt that DeFi is somehow still underused. I think we will see a MASSIVE trend of institutional players, including TradFi shops, getting more involved in DeFi thanks to the outweighted returns you can earn even just through stablecoins",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1925281051452350665"
     }
   ]
 }
