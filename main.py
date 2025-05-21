@@ -180,7 +180,7 @@ def post_to_wordpress(entry):
     return response.status_code == 201
 
 if __name__ == "__main__":
-    usernames = ["flb_xyz"]
+    usernames = ["flb_xyz", "CryptoHindiO"]
     existing = load_existing_results()
     existing_ids = set(e["id"] for e in existing if "id" in e)
     result_data = existing.copy()
