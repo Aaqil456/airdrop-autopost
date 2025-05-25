@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-25 17:11:35",
+  "last_updated": "2025-05-25 18:17:42",
   "data": [
     {
       "id": "1920317828135333994",
@@ -1522,6 +1522,31 @@
       "text": "I've been using Bungee for a long time, including the beta from the week it launched\n\nThe premise of gasless swaps and the open liquidity marketplace is what I like most about Bungee, I will continue to push the occasional swap through the protocol",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1926676678853452027"
+    },
+    {
+      "id": "1926697623819325824",
+      "text": "Remember that @gensynai raised over $50m?\n\nWell there are less than 1,000 users currently farming the hard version of testnet\n\nI've been running a node through EasyNode and have earned 618 total rewards. I plan to continue running this node to explore node farming more https://t.co/VyanulE80T",
+      "images": [
+        "https://pbs.twimg.com/media/Gr0BRbzWMAAmiia.jpg",
+        "https://pbs.twimg.com/media/Gr0BRs6WAAAQQYo.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1926697623819325824"
+    },
+    {
+      "id": "1926695168368861555",
+      "text": "Don't forget to actively complete swaps on Infinex as Swidge is the primary product they promote and most solely yap instead of using the protocol\n\nI've been aiming to do $10k volume most weeks\n\nI also recommend testing the Earn experience (deposited in MATICX today) and playing Bullrun",
+      "images": [
+        "https://pbs.twimg.com/media/Grz_CumWcAAwlkY.png"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1926695168368861555"
+    },
+    {
+      "id": "1926688109527204172",
+      "text": "Messari recently did a research report on Mira, a protocol with $10m in funding that is building an on-chain trustlayer for AI\n\nThe report highlights how Mira's consensus mechanism boosts AI accuracy from 70% to 96% and cuts hallucinations by 90%.\n\nMessari also recognizes Mira as \"a modular infrastructure layer that can be integrated into any AI system\"\n\nYou can start interacting with Mira now by signing up and prompting Klok: klokapp (.) ai?referral_code=CVUV4CN2",
+      "images": [
+        "https://pbs.twimg.com/media/Grz4n5zWMAAJO18.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1926688109527204172"
     }
   ]
 }
