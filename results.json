@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-28 13:28:33",
+  "last_updated": "2025-05-28 14:15:18",
   "data": [
     {
       "id": "1920317828135333994",
@@ -1882,6 +1882,20 @@
         "https://pbs.twimg.com/media/GsCXJvlW0AA16yq.jpg"
       ],
       "tweet_url": "https://x.com/CryptoHindiO/status/1927706843368829285"
+    },
+    {
+      "id": "1927726379019448808",
+      "text": "Blockchains are stuck in compute jail—every node re-executes every transaction, making complex apps slow and expensive.\n\n@boundless_xyz ($52m funding) unlocks universal zk compute: run heavy workloads off-chain, then verify on-chain with minimal gas. Works on any chain, in any language, with full security guarantees.\n\nReal-world use case? An example is AI-powered credit scoring, fully on-chain, at 0.1% of today’s costs. No bridges. No new L1\n\nNo bridges. No trust assumptions. Just berryfiable compute.\n\nProof of concept? Over 35,000 people submitted Boundless Proof of Read—a ZK proof they actually read our whitepaper.\n\nDon’t trust, berryfy. Think bigger, be boundless.",
+      "images": [
+        "https://pbs.twimg.com/media/GsCo7OWaMAAppTF.png"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1927726379019448808"
+    },
+    {
+      "id": "1927724636030001228",
+      "text": "🤣Pro tip to Kaito yappers, do a typing error to get higher engagement on your posts\n\n👇Check comments of my previous post about Newton",
+      "images": [],
+      "tweet_url": "https://x.com/CryptoHindiO/status/1927724636030001228"
     }
   ]
 }
