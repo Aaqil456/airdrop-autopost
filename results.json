@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-28 15:15:03",
+  "last_updated": "2025-05-28 16:17:02",
   "data": [
     {
       "id": "1920317828135333994",
@@ -1928,6 +1928,12 @@
         "https://pbs.twimg.com/media/GsCuh8tbQAAqjOV.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1927732541769007329"
+    },
+    {
+      "id": "1927752367136465237",
+      "text": "I like what @rivoxyz is building but I have my qualms\n\nThe current point method is quite extractive. For reference, Rivo takes a 0.3% fee when depositing into strategies through their platform (already very high)\n\nNow, when an epoch ends you have to EXIT AND RE-DEPOSIT into the same strategy again to continue earning points which leads to an additional 0.3% fee\n\nThis is completely unnecessary and seems to be a technique to line their pockets, hope they address and change this ASAP",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1927752367136465237"
     }
   ]
 }
