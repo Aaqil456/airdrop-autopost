@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-28 19:11:48",
+  "last_updated": "2025-05-28 20:16:12",
   "data": [
     {
       "id": "1920317828135333994",
@@ -1934,6 +1934,21 @@
       "text": "I like what @rivoxyz is building but I have my qualms\n\nThe current point method is quite extractive. For reference, Rivo takes a 0.3% fee when depositing into strategies through their platform (already very high)\n\nNow, when an epoch ends you have to EXIT AND RE-DEPOSIT into the same strategy again to continue earning points which leads to an additional 0.3% fee\n\nThis is completely unnecessary and seems to be a technique to line their pockets, hope they address and change this ASAP",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1927752367136465237"
+    },
+    {
+      "id": "1927817543529681063",
+      "text": "RT @flb_xyz: Blockchains are stuck in compute jail—every node re-executes every transaction, making complex apps slow and expensive.\n\n@boun…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1927817543529681063"
+    },
+    {
+      "id": "1927811725568717062",
+      "text": "Question for my @JumperExchange guys, why are Stargate routes not always showing up\n\nExample:\n\nI am trying to bridge USDC.e from Apechain to Arbitrum\n\n- It only shows Relay on Jumper (lose $100 to slippage)\n- When checking Stargate you can do the same bridge and only lose $2 https://t.co/uHZj4sJPyE",
+      "images": [
+        "https://pbs.twimg.com/media/GsD2i58aUAITEuC.jpg",
+        "https://pbs.twimg.com/media/GsD2jExaUAMcYpm.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1927811725568717062"
     }
   ]
 }
