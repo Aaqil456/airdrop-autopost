@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-28 23:13:32",
+  "last_updated": "2025-05-29 01:09:50",
   "data": [
     {
       "id": "1920317828135333994",
@@ -1967,6 +1967,14 @@
       "text": "RT @flb_xyz: &lt;40k people have completed this Camp Network quest\n\nIf you haven't started on the Camp ($30m funding) testnet sign up here: ht…",
       "images": [],
       "tweet_url": "https://x.com/flb_xyz/status/1927824918915469448"
+    },
+    {
+      "id": "1927878438771380272",
+      "text": "Some more Espresso x Layer3 quests just released and only 1,000 users have completed them so far\n\nThis includes a quest for Caldera in which you claim your .era username if you haven't already (if you didn't know interacting with Rari chain means you are interacting with Espresso and Molten will integrate Espresso soon)\n\nThe other is for LogX which uses Espresso to confirm blocks. LogX has a slightly tarnished reputation but continues to integrate interesting infrastructure partners such as Espresso and Hyperlane",
+      "images": [
+        "https://pbs.twimg.com/media/GsEzOTcaUAMze_t.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1927878438771380272"
     }
   ]
 }
