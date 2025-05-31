@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-05-31 20:14:12",
+  "last_updated": "2025-05-31 21:12:03",
   "data": [
     {
       "id": "1920317828135333994",
@@ -2693,6 +2693,12 @@
         "https://pbs.twimg.com/media/GsSpuKlaEAEFcW9.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1928853153769992584"
+    },
+    {
+      "id": "1928917010093924539",
+      "text": "RT @flb_xyz: Just got access to @noise_xyz, a Kaito powered dApp to trade mindshare on leverage\n\nMy first position: Short Loudio mindshare…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1928917010093924539"
     }
   ]
 }
