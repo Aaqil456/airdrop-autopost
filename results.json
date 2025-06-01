@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-01 06:19:46",
+  "last_updated": "2025-06-01 07:13:26",
   "data": [
     {
       "id": "1920317828135333994",
@@ -2787,6 +2787,20 @@
         "https://pbs.twimg.com/media/GsVjd5uaMAIdVMj.jpg"
       ],
       "tweet_url": "https://x.com/CryptoHindiO/status/1929057383562485778"
+    },
+    {
+      "id": "1929073067067933165",
+      "text": "RT @flb_xyz: The $TRAX airdrop is live for users who have engaged with Beratrax\n\nI used it throughout the testnet and for some Berachain x…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1929073067067933165"
+    },
+    {
+      "id": "1929073053063168073",
+      "text": "RT @flb_xyz: Did @megaeth_labs just get hacked?\n\nPost instantly deleted https://t.co/KSVIb7atZq",
+      "images": [
+        "https://pbs.twimg.com/media/GsUdRE1bMAAnkJm.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1929073053063168073"
     }
   ]
 }
