@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-03 17:14:17",
+  "last_updated": "2025-06-03 18:21:02",
   "data": [
     {
       "id": "1920317828135333994",
@@ -3062,6 +3062,22 @@
         "https://pbs.twimg.com/media/GsiC-j5asAA3-yV.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1929936454261846334"
+    },
+    {
+      "id": "1929961751531139237",
+      "text": "Introducing @hemi_xyz: the modular protocol with $15m in fuding that\nenables NATIVE Bitcoin Programmability\n\n- Hemi Virtual Machine (hVM) combines an EVM with a Bitcoin node\n- Smart contracts can access Bitcoin data\n- Devs can build secure, permissionless Bitcoin dApps with ease\n\nThe mainnet launched on March 12th and managed to attract over $1B TVL in less than 38 days\n\nThere are a ton of partner protocols you can interact with on Hemi as well as a trading competition on Satori that ends on June 16th",
+      "images": [
+        "https://pbs.twimg.com/media/GsiZ_D9asAwD_KM.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1929961751531139237"
+    },
+    {
+      "id": "1929950453393154515",
+      "text": "Kaito claims for $BOOP unlocked the other day\n\nIf you launched a token and didn't promote it there was a cooldown for claiming your Kaito x Boop airdrop\n\nThat cooldown has now ended and you can claim your tokens\n\nMake sure you send a little bit of SOL to the Boop account linked to your X so that you can withdraw and sell the tokens",
+      "images": [
+        "https://pbs.twimg.com/media/GsiPtYDbcAA6J2B.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1929950453393154515"
     }
   ]
 }
