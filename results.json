@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-03 21:12:54",
+  "last_updated": "2025-06-03 22:14:07",
   "data": [
     {
       "id": "1920317828135333994",
@@ -3102,6 +3102,18 @@
         "https://pbs.twimg.com/media/GsjCXJOasAYULt9.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1930006145277800587"
+    },
+    {
+      "id": "1930024329603092814",
+      "text": "RT @flb_xyz: Although @FogoChain explicitly stated that the testnet will NOT be incentivised, I still think you should be clicking\n\nWhy? Tw…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1930024329603092814"
+    },
+    {
+      "id": "1930024315547988446",
+      "text": "RT @flb_xyz: Fogo Flames Season 1 has officially come to an end\n\nYou can check your final ranking on the leaderboards\n\nIn my opinion, this…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1930024315547988446"
     }
   ]
 }
