@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-04 23:13:51",
+  "last_updated": "2025-06-05 01:10:01",
   "data": [
     {
       "id": "1920317828135333994",
@@ -3244,6 +3244,26 @@
         "https://pbs.twimg.com/media/Gsodfs0awAASaL5.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1930387822638444851"
+    },
+    {
+      "id": "1930422083194106280",
+      "text": "RT @flb_xyz: Not even 20k users have completed these Camp Network tasks ($30m+ raised)\n\nTo start on the Camp testnet sign up here: https://…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1930422083194106280"
+    },
+    {
+      "id": "1930419439310385483",
+      "text": "RT @flb_xyz: Will @FogoChain win the SVM game over Eclipse? Will it kill Solana by being a pure Firedancer chain?\n\nThe public testnet shoul…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1930419439310385483"
+    },
+    {
+      "id": "1930410814105891273",
+      "text": "Finally got access to @liminalmoney today, a HyperEVM project you should not overlook!\n\nSimilar to Unit it leverages HyperCore which makes me believe it has more potential in terms of airdrops (+ you can earn 20% whilst farming)\n\nLiminal allows you to earn yield off of delta-neutral funding rate strategies on Hyperliquid\n\nThe institutional version of the dApp also lets you customise what assets you want to farm funding rates on, a feature I love!!\n\nFurthermore, the TVL cap was lifted to $20m today and filled up in just a couple hours (didn't manage to get in this time but will monitor)\n\nThank you @BlurCrypto for the code! If anyone needs a code feel free to ask in DMs!",
+      "images": [
+        "https://pbs.twimg.com/media/GsoyZ4YasAQ7nRM.jpg"
+      ],
+      "tweet_url": "https://x.com/flb_xyz/status/1930410814105891273"
     }
   ]
 }
