@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-07 21:12:07",
+  "last_updated": "2025-06-07 22:12:57",
   "data": [
     {
       "id": "1920317828135333994",
@@ -3577,6 +3577,12 @@
         "https://pbs.twimg.com/media/Gs3CxZgaoAANvle.jpg"
       ],
       "tweet_url": "https://x.com/flb_xyz/status/1931413972542210054"
+    },
+    {
+      "id": "1931461312879677445",
+      "text": "RT @flb_xyz: Here are the stats of my main EVM wallet so far this year\n\nIt always hurts a little to see the total amount you have burned on…",
+      "images": [],
+      "tweet_url": "https://x.com/flb_xyz/status/1931461312879677445"
     }
   ]
 }
